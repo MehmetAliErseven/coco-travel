@@ -1,0 +1,117 @@
+{
+  "common": {
+    "search": "ค้นหา",
+    "allCategories": "ทุกหมวดหมู่",
+    "viewDetails": "ดูรายละเอียด",
+    "contactUs": "ติดต่อเรา",
+    "duration": "ระยะเวลา",
+    "price": "ราคา",
+    "home": "หน้าแรก",
+    "tours": "ทัวร์",
+    "about": "เกี่ยวกับเรา",
+    "contact": "ติดต่อ",
+    "address": "ที่อยู่"
+  },
+  "home": {
+    "hero": {
+      "title": "ค้นพบทัวร์ที่น่าตื่นเต้น",
+      "subtitle": "สำรวจจุดหมายปลายทางที่ดีที่สุดกับไกด์มืออาชีพของเรา"
+    },
+    "featuredTours": "ทัวร์แนะนำ",
+    "searchPlaceholder": "ค้นหาทัวร์..."
+  },
+  "tour": {
+    "whatsIncluded": "สิ่งที่รวมอยู่ในแพ็คเกจ",
+    "itinerary": "กำหนดการเดินทาง",
+    "bookTour": "จองทัวร์นี้",
+    "pricePerPerson": "{{price}} ต่อท่าน",
+    "contactVia": "ติดต่อผ่าน {{platform}}",
+    "orEmailUs": "หรือส่งอีเมลถึงเรา: {{email}}"
+  },
+  "contact": {
+    "title": "ติดต่อเรา",
+    "getInTouch": "ติดต่อเรา",
+    "form": {
+      "name": "ชื่อ",
+      "email": "อีเมล",
+      "subject": "หัวข้อ",
+      "message": "ข้อความ",
+      "send": "ส่งข้อความ",
+      "placeholders": {
+        "name": "ชื่อของคุณ",
+        "email": "อีเมลของคุณ",
+        "subject": "เรื่องอะไร",
+        "message": "ข้อความของคุณ"
+      }
+    },
+    "success": "ส่งข้อความแล้ว เราจะติดต่อกลับโดยเร็วที่สุด",
+    "error": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
+  },
+  "admin": {
+    "dashboard": "แดชบอร์ด",
+    "tours": "ทัวร์",
+    "categories": "หมวดหมู่",
+    "messages": "ข้อความ",
+    "stats": {
+      "totalTours": "จำนวนทัวร์ทั้งหมด",
+      "activeBookings": "การจองที่ใช้งานอยู่",
+      "messages": "ข้อความ",
+      "customers": "ลูกค้า"
+    },
+    "actions": {
+      "add": "เพิ่มใหม่",
+      "edit": "แก้ไข",
+      "delete": "ลบ",
+      "save": "บันทึกการเปลี่ยนแปลง",
+      "cancel": "ยกเลิก",
+      "logout": "ออกจากระบบ"
+    },
+    "form": {
+      "name": "ชื่อ",
+      "title": "ชื่อทัวร์",
+      "category": "หมวดหมู่",
+      "price": "ราคา",
+      "duration": "ระยะเวลา",
+      "description": "รายละเอียด",
+      "includes": "สิ่งที่รวมอยู่ในแพ็คเกจ",
+      "includesPlaceholder": "ใส่แต่ละรายการในบรรทัดใหม่",
+      "includesHelper": "แต่ละบรรทัดจะแสดงเป็นรายการแยก",
+      "itinerary": "กำหนดการเดินทาง",
+      "itineraryPlaceholder": "ใส่แต่ละขั้นตอนในบรรทัดใหม่",
+      "itineraryHelper": "แต่ละบรรทัดจะแสดงเป็นขั้นตอนแยก",
+      "image": "URL รูปภาพ",
+      "active": "เปิดใช้งาน",
+      "slug": "URL Slug",
+      "slugHelper": "เวอร์ชันของชื่อที่เป็นมิตรกับ URL สร้างอัตโนมัติแต่สามารถแก้ไขได้"
+    },
+    "confirmDelete": "คุณแน่ใจหรือไม่ที่จะลบรายการนี้?",
+    "deleteSuccess": "ลบรายการเรียบร้อยแล้ว",
+    "deleteError": "ไม่สามารถลบรายการได้",
+    "updateSuccess": "อัปเดตเรียบร้อยแล้ว",
+    "createSuccess": "สร้างเรียบร้อยแล้ว",
+    "duplicateSuccess": "ทำสำเนาเรียบร้อยแล้ว",
+    "duplicateError": "ไม่สามารถทำสำเนาได้",
+    "logout": {
+      "confirmTitle": "ยืนยันการออกจากระบบ",
+      "confirmMessage": "คุณแน่ใจหรือไม่ที่จะออกจากระบบ?",
+      "confirm": "ใช่ ออกจากระบบ"
+    },
+    "role": {
+      "administrator": "ผู้ดูแลระบบ"
+    }
+  },
+  "search": {
+    "results": "ผลการค้นหา",
+    "showing": "แสดงผลการค้นหาสำหรับ \"{{query}}\"",
+    "inCategory": "ในหมวดหมู่ {{category}}",
+    "noResults": "ไม่พบทัวร์ที่ตรงกับเงื่อนไขการค้นหาของคุณ"
+  },
+  "login": {
+    "title": "เข้าสู่ระบบผู้ดูแล",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "submit": "เข้าสู่ระบบ",
+    "error": "เข้าสู่ระบบล้มเหลว",
+    "invalidCredentials": "อีเมลหรือรหัสผ่านไม่ถูกต้อง"
+  }
+}
