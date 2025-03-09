@@ -23,7 +23,7 @@ const CategoryFormModal = ({ isOpen, onClose, category = null, onSave }) => {
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
-    status: true
+    is_active: true
   })
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const CategoryFormModal = ({ isOpen, onClose, category = null, onSave }) => {
       setFormData({
         name: '',
         slug: '',
-        status: true
+        is_active: true
       })
     }
   }, [category])
@@ -109,13 +109,13 @@ const CategoryFormModal = ({ isOpen, onClose, category = null, onSave }) => {
               </FormControl>
 
               <FormControl display="flex" alignItems="center">
-                <FormLabel htmlFor="status" mb="0">
+                <FormLabel htmlFor="is_active" mb="0">
                   {t('admin.form.active')}
                 </FormLabel>
                 <Switch
-                  id="status"
-                  name="status"
-                  isChecked={formData.status}
+                  id="is_active"
+                  name="is_active"
+                  isChecked={formData.is_active}
                   onChange={handleChange}
                 />
               </FormControl>

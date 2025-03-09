@@ -2,7 +2,7 @@ import axios from 'axios'
 import { authService } from './authService'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json'
   }
@@ -22,32 +22,25 @@ api.interceptors.request.use(
   }
 )
 
-// Response interceptor for handling token refresh
+// Response interceptor for handling errors
 api.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    // If the response has a data property, return it, otherwise return the whole response
+    return response.data || response
+  },
   async (error) => {
     const originalRequest = error.config
 
-    // If the error is 401 and we haven't already tried to refresh the token
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
-
-      try {
-        await authService.refreshToken()
-        const token = authService.getToken()
-        
-        // Retry the original request with new token
-        originalRequest.headers.Authorization = `Bearer ${token}`
-        return api(originalRequest)
-      } catch (refreshError) {
-        // If refresh token fails, logout user
-        authService.logout()
-        return Promise.reject(refreshError)
-      }
+      // If unauthorized, logout the user
+      authService.logout()
+      window.location.href = '/login'
+      return Promise.reject(error)
     }
 
     // Extract error message from response
-    const errorMessage = error.response?.data?.message || error.message
+    const errorMessage = error.response?.data?.detail || error.response?.data?.message || error.message
     return Promise.reject({
       ...error,
       message: errorMessage

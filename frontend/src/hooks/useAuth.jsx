@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext, useCallback } from 'react'
+import { useState, createContext, useContext, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authService } from '../services/authService'
 import { useToast } from '@chakra-ui/react'
@@ -7,29 +7,8 @@ const AuthContext = createContext(null)
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(authService.getCurrentUser())
-  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
   const toast = useToast()
-
-  useEffect(() => {
-    // Check token validity on mount
-    const checkAuth = async () => {
-      try {
-        if (authService.getToken()) {
-          await authService.refreshToken()
-          setUser(authService.getCurrentUser())
-        }
-      } catch (error) {
-        // Token is invalid, clear auth state
-        authService.logout()
-        setUser(null)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    checkAuth()
-  }, [])
 
   const login = useCallback(async (credentials) => {
     try {
@@ -57,14 +36,13 @@ export const AuthProvider = ({ children }) => {
   const value = {
     user,
     isAuthenticated: !!user,
-    loading,
     login,
     logout
   }
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }

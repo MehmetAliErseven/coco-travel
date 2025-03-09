@@ -14,21 +14,49 @@ import {
   Divider,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { Outlet, NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa'
 import { authService } from '../services/authService'
 import { useLogoutConfirm } from '../hooks/useLogoutConfirm.jsx'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const AdminLayout = () => {
   const { t } = useTranslation()
-  const user = authService.getCurrentUser()
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState(null)
   const bgColor = useColorModeValue('gray.50', 'gray.900')
   const borderColor = useColorModeValue('gray.200', 'gray.700')
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const currentUser = authService.getCurrentUser()
+        if (!currentUser) {
+          navigate('/login')
+          return
+        }
+        setUser(currentUser)
+      } catch (error) {
+        navigate('/login')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkAuth()
+  }, [navigate])
+
   const { LogoutConfirmDialog, onOpen: onLogoutConfirm } = useLogoutConfirm(() => {
     authService.logout()
+    navigate('/login')
   })
+
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
 
   return (
     <Box minH="100vh" bg={bgColor}>

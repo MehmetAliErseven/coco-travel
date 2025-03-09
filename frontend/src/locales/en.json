@@ -108,10 +108,10 @@
   },
   "login": {
     "title": "Admin Login",
-    "email": "Email",
+    "username": "Username",
     "password": "Password",
     "submit": "Login",
     "error": "Login Failed",
-    "invalidCredentials": "Invalid email or password"
+    "invalidCredentials": "Invalid username or password"
   }
 }

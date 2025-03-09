@@ -21,7 +21,7 @@ const Login = () => {
   const toast = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: ''
   })
 
@@ -66,11 +66,11 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
               <FormControl isRequired>
-                <FormLabel>{t('login.email')}</FormLabel>
+                <FormLabel>{t('login.username')}</FormLabel>
                 <Input
-                  name="email"
-                  type="email"
-                  value={formData.email}
+                  name="username"
+                  type="text"
+                  value={formData.username}
                   onChange={handleChange}
                 />
               </FormControl>

@@ -15,7 +15,6 @@ import PrivateRoute from './components/PrivateRoute'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AuthProvider } from './hooks/useAuth.jsx'
 import LoadingSpinner from './components/LoadingSpinner'
-import './App.css'
 
 // Set up API interceptors
 import api from './services/api'

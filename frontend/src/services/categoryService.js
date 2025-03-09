@@ -1,38 +1,33 @@
 import api from './api'
 
 export const categoryService = {
-  // Tüm kategorileri getir
-  getCategories: async () => {
-    return await api.get('/categories')
+  // Get all categories
+  getCategories: async (params = {}) => {
+    return await api.get('/categories', { params })
   },
 
-  // Kategori detayını getir
+  // Get active categories
+  getActiveCategories: async () => {
+    return await api.get('/categories', { params: { active_only: true } })
+  },
+
+  // Get category by ID
   getCategoryById: async (id) => {
     return await api.get(`/categories/${id}`)
   },
 
-  // Yeni kategori oluştur
+  // Create new category
   createCategory: async (categoryData) => {
     return await api.post('/categories', categoryData)
   },
 
-  // Kategori güncelle
+  // Update category
   updateCategory: async (id, categoryData) => {
     return await api.put(`/categories/${id}`, categoryData)
   },
 
-  // Kategori sil
+  // Delete category
   deleteCategory: async (id) => {
     return await api.delete(`/categories/${id}`)
-  },
-
-  // Aktif kategorileri getir
-  getActiveCategories: async () => {
-    return await api.get('/categories/active')
-  },
-
-  // Kategori slug'ına göre detay getir
-  getCategoryBySlug: async (slug) => {
-    return await api.get(`/categories/slug/${slug}`)
   }
 }

@@ -17,6 +17,7 @@ import {
   HStack,
   useToast,
   Skeleton,
+  Badge,
 } from '@chakra-ui/react'
 import { FaEllipsisV, FaPlus } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
@@ -37,8 +38,8 @@ const ToursManagement = () => {
   const fetchData = async () => {
     try {
       const [toursData, categoriesData] = await Promise.all([
-        tourService.getTours(),
-        categoryService.getCategories()
+        tourService.getTours({ active_only: false }),
+        categoryService.getCategories({ active_only: false })
       ])
       setTours(toursData)
       setCategories(categoriesData)
@@ -60,7 +61,12 @@ const ToursManagement = () => {
   }, [])
 
   const handleEdit = (tour) => {
-    setSelectedTour(tour)
+    // Find the full category object for the tour
+    const category = categories.find(c => c.id === tour.category_id)
+    setSelectedTour({
+      ...tour,
+      category: category?.name // Add category name for display purposes
+    })
     onOpen()
   }
 
@@ -99,7 +105,7 @@ const ToursManagement = () => {
 
   const handleDuplicate = async (tour) => {
     try {
-      const { id, ...tourData } = tour
+      const { id, created_at, updated_at, slug, ...tourData } = tour
       tourData.title = `${tourData.title} (Copy)`
       await tourService.createTour(tourData)
       toast({
@@ -150,6 +156,11 @@ const ToursManagement = () => {
     }
   }
 
+  const getCategoryName = (categoryId) => {
+    const category = categories.find(c => c.id === categoryId)
+    return category ? category.name : 'Unknown Category'
+  }
+
   return (
     <Box>
       <HStack justify="space-between" mb={6}>
@@ -191,10 +202,21 @@ const ToursManagement = () => {
               tours.map((tour) => (
                 <Tr key={tour.id}>
                   <Td>{tour.title}</Td>
-                  <Td>{tour.category}</Td>
+                  <Td>{getCategoryName(tour.category_id)}</Td>
                   <Td isNumeric>${tour.price}</Td>
                   <Td>{tour.duration}</Td>
-                  <Td>{tour.status}</Td>
+                  <Td>
+                    <Badge 
+                      colorScheme={tour.is_active ? "green" : "red"}
+                    >
+                      {tour.is_active ? "Active" : "Inactive"}
+                    </Badge>
+                    {tour.featured && (
+                      <Badge ml={2} colorScheme="purple">
+                        Featured
+                      </Badge>
+                    )}
+                  </Td>
                   <Td>
                     <Menu>
                       <MenuButton

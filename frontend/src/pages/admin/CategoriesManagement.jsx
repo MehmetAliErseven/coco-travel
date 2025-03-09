@@ -165,11 +165,11 @@ const CategoriesManagement = () => {
                   <Td isNumeric>{category.tourCount}</Td>
                   <Td>
                     <Badge
-                      colorScheme={category.status ? 'green' : 'gray'}
+                      colorScheme={category.is_active ? 'green' : 'gray'}
                       borderRadius="full"
                       px={2}
                     >
-                      {category.status ? 'active' : 'inactive'}
+                      {category.is_active ? 'Active' : 'Inactive'}
                     </Badge>
                   </Td>
                   <Td>
