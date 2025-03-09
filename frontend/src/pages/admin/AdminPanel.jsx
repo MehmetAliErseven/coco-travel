@@ -103,18 +103,7 @@ const AdminPanel = () => {
         <CardHeader>
           <Heading size="md">{t('admin.recentActivities')}</Heading>
         </CardHeader>
-        <CardBody>
-          <List spacing={3}>
-            {activities.map((activity) => (
-              <ListItem key={activity.id}>
-                <Text fontSize="sm" color="gray.500">
-                  {new Date(activity.timestamp).toLocaleString()}
-                </Text>
-                <Text>{activity.description}</Text>
-              </ListItem>
-            ))}
-          </List>
-        </CardBody>
+       
       </Card>
     </Box>
   )

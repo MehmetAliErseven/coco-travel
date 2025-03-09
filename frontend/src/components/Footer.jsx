@@ -8,7 +8,7 @@ const Footer = () => {
         <SimpleGrid columns={{ base: 1, md: 4 }} spacing={8}>
           {/* Company Info */}
           <Stack spacing={4}>
-            <Text fontSize="lg" fontWeight="bold">Travel Agency</Text>
+            <Text fontSize="lg" fontWeight="bold">Coco Travel</Text>
             <Text color="gray.600">
               Your trusted partner for unforgettable travel experiences
             </Text>
@@ -33,15 +33,15 @@ const Footer = () => {
           {/* Contact Info */}
           <Stack spacing={4}>
             <Text fontWeight="bold">Contact Us</Text>
-            <Text>Email: info@travelagency.com</Text>
-            <Text>Phone: +1 234 567 8900</Text>
-            <Text>Address: Your Address Here</Text>
+            <Text>Email: cocotravel.agc@gmail.com</Text>
+            <Text>Phone: +66 82 106 5316</Text>
+            <Text>Address: cocotravelagc</Text>
           </Stack>
         </SimpleGrid>
 
         {/* Copyright */}
         <Text mt={10} pt={6} borderTop="1px" borderColor="gray.200" textAlign="center">
-          © {new Date().getFullYear()} Travel Agency. All rights reserved.
+          © {new Date().getFullYear()} Coco Travel. All rights reserved.
         </Text>
       </Container>
     </Box>

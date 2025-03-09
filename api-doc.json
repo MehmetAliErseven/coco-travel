@@ -2,7 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Coco Travel API",
-    "version": "0.1.0"
+    "description": "API for Coco Travel website",
+    "version": "1.0.0"
   },
   "paths": {
     "/api/auth/register": {
@@ -85,6 +86,32 @@
             }
           }
         }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Get Current User Info",
+        "operationId": "get_current_user_info_api_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserOut"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/tours": {
@@ -261,7 +288,11 @@
             "content": {
               "application/json": {
                 "schema": {
-
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TourResponse"
+                  },
+                  "title": "Response Search Tours Api Tours Search Get"
                 }
               }
             }
@@ -292,7 +323,11 @@
             "content": {
               "application/json": {
                 "schema": {
-
+                  "items": {
+                    "$ref": "#/components/schemas/TourResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get Featured Tours Api Tours Featured Get"
                 }
               }
             }
@@ -324,7 +359,11 @@
             "content": {
               "application/json": {
                 "schema": {
-
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TourResponse"
+                  },
+                  "title": "Response Get Tours By Category Api Tours Category  Category Slug  Get"
                 }
               }
             }
@@ -482,6 +521,52 @@
             }
           }
         }
+      }
+    },
+    "/api/tours/upload": {
+      "post": {
+        "tags": [
+          "tours"
+        ],
+        "summary": "Upload Tour Image",
+        "operationId": "upload_tour_image_api_tours_upload_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_tour_image_api_tours_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
       }
     },
     "/api/categories": {
@@ -1015,6 +1100,62 @@
         ]
       }
     },
+    "/api/admin/dashboard/stats": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get Dashboard Stats",
+        "operationId": "get_dashboard_stats_api_admin_dashboard_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DashboardStats"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/api/admin/dashboard/activities": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Get Recent Activities",
+        "operationId": "get_recent_activities_api_admin_dashboard_activities_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Activity"
+                  },
+                  "type": "array",
+                  "title": "Response Get Recent Activities Api Admin Dashboard Activities Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
     "/": {
       "get": {
         "summary": "Root",
@@ -1036,6 +1177,35 @@
   },
   "components": {
     "schemas": {
+      "Activity": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp",
+          "description",
+          "type"
+        ],
+        "title": "Activity"
+      },
       "Body_login_api_auth_token_post": {
         "properties": {
           "grant_type": {
@@ -1092,6 +1262,20 @@
           "password"
         ],
         "title": "Body_login_api_auth_token_post"
+      },
+      "Body_upload_tour_image_api_tours_upload_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_upload_tour_image_api_tours_upload_post"
       },
       "CategoryCreate": {
         "properties": {
@@ -1198,6 +1382,34 @@
           "name"
         ],
         "title": "CategoryUpdate"
+      },
+      "DashboardStats": {
+        "properties": {
+          "totalTours": {
+            "type": "integer",
+            "title": "Totaltours"
+          },
+          "activeBookings": {
+            "type": "integer",
+            "title": "Activebookings"
+          },
+          "unreadMessages": {
+            "type": "integer",
+            "title": "Unreadmessages"
+          },
+          "totalCustomers": {
+            "type": "integer",
+            "title": "Totalcustomers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "totalTours",
+          "activeBookings",
+          "unreadMessages",
+          "totalCustomers"
+        ],
+        "title": "DashboardStats"
       },
       "HTTPValidationError": {
         "properties": {
@@ -1349,6 +1561,22 @@
             "type": "array",
             "title": "Images"
           },
+          "includes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Includes",
+            "default": []
+          },
+          "itinerary": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Itinerary",
+            "default": []
+          },
           "featured": {
             "type": "boolean",
             "title": "Featured",
@@ -1399,6 +1627,22 @@
             },
             "type": "array",
             "title": "Images"
+          },
+          "includes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Includes",
+            "default": []
+          },
+          "itinerary": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Itinerary",
+            "default": []
           },
           "featured": {
             "type": "boolean",
@@ -1485,6 +1729,22 @@
             "type": "array",
             "title": "Images"
           },
+          "includes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Includes",
+            "default": []
+          },
+          "itinerary": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Itinerary",
+            "default": []
+          },
           "featured": {
             "type": "boolean",
             "title": "Featured",
@@ -1547,6 +1807,10 @@
           "is_active": {
             "type": "boolean",
             "title": "Is Active"
+          },
+          "is_superuser": {
+            "type": "boolean",
+            "title": "Is Superuser"
           }
         },
         "type": "object",
@@ -1554,7 +1818,8 @@
           "id",
           "email",
           "username",
-          "is_active"
+          "is_active",
+          "is_superuser"
         ],
         "title": "UserOut"
       },
@@ -1600,7 +1865,7 @@
             "scopes": {
 
             },
-            "tokenUrl": "api/auth/token"
+            "tokenUrl": "/api/auth/token"
           }
         }
       }

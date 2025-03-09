@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "Starting Coco Travel setup..."
+echo "Coco Travel Setup Script"
+echo "----------------------"
 
 # Check if Python is installed
 if ! command -v python3 &> /dev/null; then
@@ -20,9 +21,26 @@ if ! command -v node &> /dev/null; then
     exit 1
 fi
 
-# Create .env file
-echo "Creating environment files..."
-cat > backend/.env << EOL
+# Ask for environment
+read -p "Choose environment (dev/prod) [dev]: " ENV_TYPE
+ENV_TYPE=${ENV_TYPE:-dev}
+
+# Ask for installation type
+read -p "Do you want a clean installation? This will delete all data! (y/N): " CLEAN_INSTALL
+
+# Handle installation type
+if [[ $CLEAN_INSTALL =~ ^[Yy]$ ]]; then
+    echo "Performing clean installation..."
+    docker-compose down -v
+else
+    echo "Performing update installation..."
+    docker-compose down
+fi
+
+# Create root .env file if it doesn't exist
+if [ ! -f .env ]; then
+    echo "Creating root .env file..."
+    cat > .env << EOL
 POSTGRES_USER=cocotravel
 POSTGRES_PASSWORD=cocotravel123
 POSTGRES_DB=cocotravel_db
@@ -30,40 +48,65 @@ SECRET_KEY=your-super-secret-key-here
 ADMIN_EMAIL=admin@cocotravel.com
 ADMIN_PASSWORD=admin123
 ADMIN_USERNAME=admin
+NODE_ENV=${ENV_TYPE}
+FRONTEND_PORT=5173
 EOL
+fi
 
-# Setup backend
-echo "Setting up backend..."
-cd backend
-python3 -m pip install -r requirements.txt
+# Start services based on environment
+if [ "$ENV_TYPE" = "prod" ]; then
+    echo "Starting production services..."
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+else
+    echo "Starting development services..."
+    docker-compose up -d --build
+fi
 
-# Start Docker services
-echo "Starting Docker services..."
-docker-compose down -v
-docker-compose up -d
-
-# Wait for PostgreSQL to be ready
-echo "Waiting for PostgreSQL to be ready..."
+# Wait for services to be ready
+echo "Waiting for services to be ready..."
 sleep 10
 
-# Run migrations
-echo "Running database migrations..."
-alembic upgrade head
-
-# Create admin user
-echo "Creating admin user..."
-python3 scripts/create_admin.py
-
-# Setup frontend
-echo "Setting up frontend..."
-cd ../frontend
-npm install
+# Run migrations and create admin user only for clean installation
+if [[ $CLEAN_INSTALL =~ ^[Yy]$ ]]; then
+    echo "Running clean installation tasks..."
+    
+    # Check database existence
+    echo "Verifying database setup..."
+    docker-compose exec -T postgres psql -U cocotravel -c "\l"
+    
+    # Reset migrations and clean database tables
+    echo "Resetting alembic migrations..."
+    docker-compose exec -T backend alembic current
+    docker-compose exec -T backend alembic stamp base
+    
+    # Drop all tables explicitly to ensure a clean state
+    echo "Dropping all existing tables..."
+    docker-compose exec -T postgres psql -U cocotravel -d cocotravel_db -c "DROP TABLE IF EXISTS alembic_version, categories, messages, tours, users CASCADE;"
+    
+    # Run migrations
+    echo "Running database migrations..."
+    docker-compose exec -T backend alembic upgrade head
+    
+    # Create admin user
+    echo "Creating admin user..."
+    docker-compose exec -T backend python scripts/create_admin.py
+else
+    echo "Checking if migrations are needed..."
+    docker-compose exec -T backend alembic upgrade head
+fi
 
 echo "Setup completed successfully!"
 echo
-echo "You can now start the development servers:"
-echo "Backend (from backend directory): uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
-echo "Frontend (from frontend directory): npm run dev"
+if [ "$ENV_TYPE" = "prod" ]; then
+    echo "The application is now running at:"
+    echo "Frontend: http://localhost"
+    echo "Backend API: http://localhost/api"
+else
+    echo "The application is now running at:"
+    echo "Frontend: http://localhost:5173"
+    echo "Backend API: http://localhost:8000/api"
+fi
+echo "API Documentation: http://localhost:8000/api/docs"
 echo
 echo "Default admin credentials:"
 echo "Username: admin"

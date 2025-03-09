@@ -9,7 +9,7 @@ const PublicLayout = () => {
       <Header />
       
       {/* Main Content */}
-      <Box flex="1" as="main" p={4}>
+      <Box flex="1" as="main">
         <Outlet />
       </Box>
 

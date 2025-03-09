@@ -61,6 +61,14 @@ const TourDetail = () => {
     })
   }
 
+  const getImageUrl = (images) => {
+    if (!images || (Array.isArray(images) && images.length === 0)) {
+      return null;
+    }
+    const imageUrl = Array.isArray(images) ? images[0] : images;
+    return imageUrl.startsWith('http') ? imageUrl : `${import.meta.env.VITE_API_URL}${imageUrl}`;
+  };
+
   if (isLoading) {
     return (
       <Container maxW="container.xl" py={8}>
@@ -97,19 +105,20 @@ const TourDetail = () => {
         {/* Sol Kolon - Tour Detayları */}
         <GridItem>
           <Image
-            src={tour.image}
+            src={getImageUrl(tour.images)}
             alt={tour.title}
             borderRadius="lg"
             w="100%"
             h="400px"
             objectFit="cover"
             mb={6}
+            fallback={<Box height="400px" width="100%" bg="gray.100" />}
           />
           
           <Stack spacing={4}>
             <Box>
               <Badge colorScheme="blue" mb={2}>
-                {tour.category}
+                {tour.category?.name || "Uncategorized"}
               </Badge>
               <Heading size="xl">{tour.title}</Heading>
               <Text color="blue.600" fontSize="2xl" fontWeight="bold" mt={2}>
@@ -119,30 +128,35 @@ const TourDetail = () => {
 
             <Text fontSize="lg">{tour.description}</Text>
 
-            <Box>
-              <Heading size="md" mb={4}>{t('tour.whatsIncluded')}:</Heading>
-              <List spacing={3}>
-                {tour.includes?.map((item, index) => (
-                  <ListItem key={index}>
-                    <ListIcon as={CheckCircleIcon} color="green.500" />
-                    {item}
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
+            {Array.isArray(tour.includes) && tour.includes.length > 0 && (
+              <Box>
+                <Heading size="md" mb={4}>{t('tour.whatsIncluded')}:</Heading>
+                <List spacing={3}>
+                  {tour.includes.map((item, index) => (
+                    <ListItem key={index}>
+                      <ListIcon as={CheckCircleIcon} color="green.500" />
+                      {item}
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            )}
 
-            <Divider />
-
-            <Box>
-              <Heading size="md" mb={4}>{t('tour.itinerary')}:</Heading>
-              <List spacing={3}>
-                {tour.itinerary?.map((item, index) => (
-                  <ListItem key={index}>
-                    {item}
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
+            {Array.isArray(tour.itinerary) && tour.itinerary.length > 0 && (
+              <>
+                <Divider />
+                <Box>
+                  <Heading size="md" mb={4}>{t('tour.itinerary')}:</Heading>
+                  <List spacing={3}>
+                    {tour.itinerary.map((item, index) => (
+                      <ListItem key={index}>
+                        {item}
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              </>
+            )}
           </Stack>
         </GridItem>
 
@@ -182,7 +196,7 @@ const TourDetail = () => {
               </Button>
 
               <Text fontSize="sm" color="gray.500" textAlign="center">
-                {t('tour.orEmailUs', { email: 'info@travelagency.com' })}
+                {t('tour.orEmailUs', { email: 'cocotravel.agc@gmail.com' })}
               </Text>
             </Stack>
           </Box>

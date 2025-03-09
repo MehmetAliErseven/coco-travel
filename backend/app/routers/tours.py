@@ -1,6 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File
 from sqlalchemy.orm import Session
 from typing import List, Optional
+import shutil
+import os
+from pathlib import Path
 from ..database import get_db
 from ..models.tour import Tour, Category
 from ..routers.auth import get_current_user
@@ -16,6 +19,8 @@ class TourBase(BaseModel):
     duration: str
     location: str
     images: List[str]
+    includes: List[str] = []
+    itinerary: List[str] = []
     featured: bool = False
     category_id: int
 
@@ -38,6 +43,10 @@ class TourResponse(TourBase):
 
 def create_slug(title: str) -> str:
     return title.lower().replace(" ", "-")
+
+# Uploads dizinini oluştur
+UPLOAD_DIR = Path("uploads/tours")
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 @router.get("/tours", response_model=List[TourResponse])
 async def get_tours(
@@ -149,3 +158,29 @@ async def delete_tour(
     db_tour.is_active = False
     db.commit()
     return {"message": "Tour deleted successfully"}
+
+# Yeni dosya yükleme endpoint'i
+@router.post("/tours/upload")
+async def upload_tour_image(
+    file: UploadFile = File(...),
+    current_user: dict = Depends(get_current_user)
+):
+    try:
+        # Dosya uzantısını kontrol et
+        file_extension = file.filename.split('.')[-1].lower()
+        if file_extension not in ['jpg', 'jpeg', 'png', 'gif']:
+            raise HTTPException(status_code=400, detail="Only image files (jpg, jpeg, png, gif) are allowed")
+        
+        # Benzersiz dosya adı oluştur
+        filename = f"{datetime.now().timestamp()}_{file.filename}"
+        file_path = UPLOAD_DIR / filename
+        
+        # Dosyayı kaydet
+        with file_path.open("wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Dosya URL'ini döndür
+        return {"url": f"/uploads/tours/{filename}"}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

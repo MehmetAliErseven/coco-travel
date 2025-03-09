@@ -1,10 +1,19 @@
 import { Box, Image, Badge, Text, Stack, Heading, Button } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import fallbackImage from '../assets/images/keywest.jpg'
 
-const TourCard = ({ id, title, description, price, duration, image, category }) => {
+const TourCard = ({ id, title, description, price, duration, images, category }) => {
   const navigate = useNavigate()
   const { t } = useTranslation()
+
+  const getImageUrl = (images) => {
+    if (!images || (Array.isArray(images) && images.length === 0)) {
+      return fallbackImage;
+    }
+    const imageUrl = Array.isArray(images) ? images[0] : images;
+    return imageUrl.startsWith('http') ? imageUrl : `${import.meta.env.VITE_API_URL}${imageUrl}`;
+  };
 
   return (
     <Box 
@@ -19,11 +28,12 @@ const TourCard = ({ id, title, description, price, duration, image, category }) 
       }}
     >
       <Image 
-        src={image || 'https://via.placeholder.com/300x200'} 
+        src={getImageUrl(images)} 
         alt={title}
         height="200px"
         width="100%"
         objectFit="cover"
+        fallback={<Box height="200px" width="100%" bg="gray.100" />}
       />
 
       <Box p="6">

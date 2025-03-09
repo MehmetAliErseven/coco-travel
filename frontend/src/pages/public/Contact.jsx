@@ -140,7 +140,7 @@ const Contact = () => {
                 <Icon as={FaWhatsapp} mr={2} color="green.500" />
                 WhatsApp
               </Text>
-              <Text>+1 234 567 8900</Text>
+              <Text>+66 82 106 5316</Text>
             </Box>
 
             <Box>
@@ -148,7 +148,7 @@ const Contact = () => {
                 <Icon as={FaLine} mr={2} color="green.400" />
                 Line
               </Text>
-              <Text>@travelagency</Text>
+              <Text>@cocotravelagc</Text>
             </Box>
 
             <Box>
@@ -156,7 +156,7 @@ const Contact = () => {
                 <Icon as={FaEnvelope} mr={2} color="blue.500" />
                 Email
               </Text>
-              <Text>info@travelagency.com</Text>
+              <Text>cocotravel.agc@gmail.com</Text>
             </Box>
 
             <Box>

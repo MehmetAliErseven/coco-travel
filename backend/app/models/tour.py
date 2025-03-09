@@ -26,6 +26,8 @@ class Tour(Base, TimestampMixin):
     duration = Column(String(50))  # e.g., "2 days", "4 hours"
     location = Column(String(100))
     images = Column(JSON)  # Store array of image URLs
+    includes = Column(JSON, default=list)  # Store array of included items
+    itinerary = Column(JSON, default=list)  # Store array of itinerary steps
     featured = Column(Boolean, default=False)
     is_active = Column(Boolean, default=True)
     

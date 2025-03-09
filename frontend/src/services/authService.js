@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 const TOKEN_KEY = 'access_token'
 const USER_KEY = 'user'
 
@@ -32,7 +32,7 @@ export const authService = {
       formData.append('username', credentials.username)
       formData.append('password', credentials.password)
 
-      const tokenResponse = await authApi.post('/auth/token', formData, {
+      const tokenResponse = await authApi.post('/api/auth/token', formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -42,7 +42,7 @@ export const authService = {
       localStorage.setItem(TOKEN_KEY, access_token)
 
       // Then get user info
-      const userResponse = await authApi.get('/auth/me')
+      const userResponse = await authApi.get('/api/auth/me')
       const user = userResponse.data
       localStorage.setItem(USER_KEY, JSON.stringify(user))
 

@@ -17,13 +17,23 @@ import {
   NumberInputField,
   Switch,
   FormHelperText,
+  Box,
+  Image,
+  IconButton,
+  Wrap,
+  WrapItem,
+  useToast,
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { FaTrash, FaUpload } from 'react-icons/fa'
+import { tourService } from '../../services/tourService'
 
 const TourFormModal = ({ isOpen, onClose, tour = null, categories = [], onSave }) => {
   const { t } = useTranslation()
+  const toast = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [formData, setFormData] = useState({
     title: '',
     category_id: '',
@@ -79,13 +89,40 @@ const TourFormModal = ({ isOpen, onClose, tour = null, categories = [], onSave }
     }))
   }
 
-  const handleImagesChange = (e) => {
-    const value = e.target.value
-    // Split by commas and trim whitespace
-    const imageArray = value.split(',').map(url => url.trim()).filter(url => url)
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    try {
+      setUploadingImage(true)
+      const response = await tourService.uploadImage(file)
+      setFormData(prev => ({
+        ...prev,
+        images: [...prev.images, response.url]
+      }))
+      toast({
+        title: t('admin.form.imageUploadSuccess'),
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
+    } catch (error) {
+      toast({
+        title: t('admin.form.imageUploadError'),
+        description: error.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
+  const handleRemoveImage = (index) => {
     setFormData(prev => ({
       ...prev,
-      images: imageArray
+      images: prev.images.filter((_, i) => i !== index)
     }))
   }
 
@@ -113,16 +150,21 @@ const TourFormModal = ({ isOpen, onClose, tour = null, categories = [], onSave }
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="xl"
+      isCentered
+    >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxH="90vh">
         <ModalHeader>
           {t(tour ? 'admin.actions.edit' : 'admin.actions.add')}
         </ModalHeader>
         <ModalCloseButton />
         
         <form onSubmit={handleSubmit}>
-          <ModalBody>
+          <ModalBody overflowY="auto" maxH="calc(90vh - 150px)">
             <VStack spacing={4}>
               <FormControl isRequired>
                 <FormLabel>{t('admin.form.title')}</FormLabel>
@@ -220,14 +262,49 @@ const TourFormModal = ({ isOpen, onClose, tour = null, categories = [], onSave }
               <FormControl>
                 <FormLabel>{t('admin.form.images')}</FormLabel>
                 <Input
-                  name="images"
-                  value={formData.images.join(', ')}
-                  onChange={handleImagesChange}
-                  placeholder="Enter image URLs separated by commas"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  display="none"
+                  id="tour-image-upload"
                 />
-                <FormHelperText>
-                  Enter multiple image URLs separated by commas
-                </FormHelperText>
+                <Button
+                  as="label"
+                  htmlFor="tour-image-upload"
+                  leftIcon={<FaUpload />}
+                  colorScheme="blue"
+                  variant="outline"
+                  cursor="pointer"
+                  isLoading={uploadingImage}
+                  mb={4}
+                >
+                  {t('admin.form.uploadImage')}
+                </Button>
+                
+                <Wrap spacing={4}>
+                  {formData.images.map((image, index) => (
+                    <WrapItem key={index} position="relative">
+                      <Box position="relative">
+                        <Image
+                          src={image}
+                          alt={`Tour image ${index + 1}`}
+                          boxSize="100px"
+                          objectFit="cover"
+                          borderRadius="md"
+                        />
+                        <IconButton
+                          icon={<FaTrash />}
+                          size="sm"
+                          colorScheme="red"
+                          position="absolute"
+                          top={1}
+                          right={1}
+                          onClick={() => handleRemoveImage(index)}
+                        />
+                      </Box>
+                    </WrapItem>
+                  ))}
+                </Wrap>
               </FormControl>
 
               <FormControl display="flex" alignItems="center">
