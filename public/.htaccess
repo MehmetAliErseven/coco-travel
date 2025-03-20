@@ -1,0 +1,33 @@
+# Enable URL rewriting
+<IfModule mod_rewrite.c>
+    # Turn on the rewrite engine
+    RewriteEngine On
+    
+    # Handle static assets
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^assets/(.*)$ assets/$1 [L]
+    
+    # Handle front controller
+    # If the requested file or directory exists, serve it directly
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Otherwise, forward it to index.php and capture the URL
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+    
+    # Gzip compression
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    </IfModule>
+</IfModule>
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Disable directory listing
+Options -Indexes
+
+# Handle errors
+ErrorDocument 404 /index.php?url=errors/notfound
+ErrorDocument 500 /index.php?url=errors/server

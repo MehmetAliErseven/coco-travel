@@ -1,0 +1,96 @@
+<!-- Search Results Header -->
+<div class="bg-light py-5">
+    <div class="container">
+        <h1 class="mb-3">Search Results</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= \App\Helpers\url() ?>">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+            </ol>
+        </nav>
+        
+        <!-- Search Form -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <form id="tourSearchForm" action="<?= \App\Helpers\url('home/search') ?>" method="GET" class="row g-3">
+                    <div class="col-md-8">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="searchInput" name="query" 
+                                   value="<?= htmlspecialchars($query) ?>">
+                            <label for="searchInput">Search Tours</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <select class="form-select" id="category-filter" name="category_id">
+                                <option value="0">All Categories</option>
+                                <?php foreach ($categories as $category): ?>
+                                <option value="<?= $category['id'] ?>" <?= $categoryId == $category['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($category['name']) ?>
+                                </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <label for="category-filter">Category</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary h-100 w-100">
+                            <i class="fas fa-search me-2"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Results -->
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Found <?= count($searchResults) ?> Result<?= count($searchResults) !== 1 ? 's' : '' ?></h2>
+        </div>
+
+        <?php if (empty($searchResults)): ?>
+            <div class="alert alert-info">
+                <p class="mb-0">No tours found matching your search "<?= htmlspecialchars($query) ?>". Please try different keywords or browse our <a href="<?= \App\Helpers\url('tours') ?>">tour catalog</a>.</p>
+            </div>
+        <?php else: ?>
+            <div class="row g-4">
+                <?php foreach ($searchResults as $tour): ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card tour-card h-100">
+                        <?php if (!empty($tour['image_url'])): ?>
+                        <img src="<?= \App\Helpers\asset('uploads/' . $tour['image_url']) ?>" class="card-img-top" alt="<?= htmlspecialchars($tour['title']) ?>">
+                        <?php else: ?>
+                        <img src="<?= \App\Helpers\asset('images/placeholder.jpg') ?>" class="card-img-top" alt="<?= htmlspecialchars($tour['title']) ?>">
+                        <?php endif; ?>
+                        
+                        <?php if ($tour['price']): ?>
+                        <div class="tour-price">
+                            <?= \App\Helpers\formatPrice($tour['price']) ?>
+                        </div>
+                        <?php endif; ?>
+                        
+                        <div class="card-body">
+                            <span class="category-badge mb-2"><?= htmlspecialchars($tour['category_name']) ?></span>
+                            <h5 class="card-title"><?= htmlspecialchars($tour['title']) ?></h5>
+                            
+                            <?php if ($tour['duration']): ?>
+                            <p class="tour-duration mb-2">
+                                <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?>
+                            </p>
+                            <?php endif; ?>
+                            
+                            <p class="card-text"><?= \App\Helpers\truncate(htmlspecialchars($tour['description']), 120) ?></p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <a href="<?= \App\Helpers\url('tours/view/' . $tour['slug']) ?>" class="btn btn-outline-primary w-100">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
