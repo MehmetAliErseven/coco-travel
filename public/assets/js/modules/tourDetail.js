@@ -27,6 +27,12 @@ export default class TourDetail {
         if (!this.shareButtons.length) return;
         
         this.shareButtons.forEach(button => {
+            const platform = button.dataset.platform;
+            if (platform) {
+                const shareText = platform === 'email' ? `Share via ${platform}` : `Share on ${platform}`;
+                button.setAttribute('aria-label', window.translationService.translate(shareText));
+            }
+            
             button.addEventListener('click', (e) => {
                 // Don't prevent default for email links
                 if (!button.getAttribute('href')?.startsWith('mailto:')) {
@@ -51,6 +57,9 @@ export default class TourDetail {
         if (!this.galleryImages.length || !this.mainImage) return;
         
         this.galleryImages.forEach(image => {
+            // Add aria-label for accessibility
+            image.setAttribute('aria-label', window.translationService.translate('Click to enlarge'));
+            
             image.addEventListener('click', () => {
                 // Update main image when thumbnail is clicked
                 const fullSrc = image.dataset.fullImage;

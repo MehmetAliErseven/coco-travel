@@ -21,7 +21,7 @@
     <div class="card-body p-0">
         <?php if (empty($tours)): ?>
             <div class="p-4 text-center">
-                <p class="text-muted mb-0">No tours found.</p>
+                <p class="text-muted mb-0"><?= $translator->trans('No tours found') ?></p>
             </div>
         <?php else: ?>
             <div class="table-responsive">

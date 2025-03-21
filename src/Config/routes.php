@@ -11,6 +11,7 @@ return [
     'api/tours/page/{page}' => ['controller' => 'Api', 'action' => 'getToursByPage'],
     'api/contact/submit' => ['controller' => 'Api', 'action' => 'submitContact'],
     'api/change-language' => ['controller' => 'Api', 'action' => 'changeLanguage'],
+    'api/translations' => ['controller' => 'Api', 'action' => 'getTranslations'],
 
     // Admin Routes
     'admin' => ['controller' => 'Admin\Dashboard', 'action' => 'index'],

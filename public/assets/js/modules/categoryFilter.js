@@ -51,7 +51,7 @@ export default class CategoryFilter {
             const tourCards = tours.map(tour => this.createTourCard(tour)).join('');
             this.container.innerHTML = tourCards;
         } else {
-            this.container.innerHTML = '<div class="col-12 text-center">No tours found in this category</div>';
+            this.container.innerHTML = `<div class="col-12 text-center">${window.translationService.translate('No tours found')}</div>`;
         }
     }
 
@@ -71,7 +71,7 @@ export default class CategoryFilter {
                     </div>` : ''}
                     
                     <div class="card-body">
-                        <span class="category-badge mb-2">${tour.category_name || 'Uncategorized'}</span>
+                        <span class="category-badge mb-2">${tour.category_name || window.translationService.translate('Uncategorized')}</span>
                         <h5 class="card-title">${tour.title}</h5>
                         
                         ${tour.duration ? 
@@ -82,7 +82,9 @@ export default class CategoryFilter {
                         <p class="card-text">${tour.description ? tour.description.substring(0, 80) + '...' : ''}</p>
                     </div>
                     <div class="card-footer bg-white border-top-0">
-                        <a href="${this.BASE_URL}/tours/view/${tour.slug}" class="btn btn-outline-primary w-100">View Details</a>
+                        <a href="${this.BASE_URL}/tours/view/${tour.slug}" class="btn btn-outline-primary w-100">
+                            ${window.translationService.translate('View Details')}
+                        </a>
                     </div>
                 </div>
             </div>

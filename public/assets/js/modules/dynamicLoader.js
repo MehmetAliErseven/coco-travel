@@ -59,7 +59,6 @@ export default class DynamicLoader {
     }
 
     createTourCard(tour) {
-        // Same card template as CategoryFilter
         return `
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
@@ -69,7 +68,7 @@ export default class DynamicLoader {
                         <p class="card-text">${tour.description.substring(0, 100)}...</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="price">$${tour.price}</span>
-                            <a href="/tour/${tour.slug}" class="btn btn-primary">View Details</a>
+                            <a href="/tour/${tour.slug}" class="btn btn-primary">${window.translationService.translate('View Details')}</a>
                         </div>
                     </div>
                 </div>

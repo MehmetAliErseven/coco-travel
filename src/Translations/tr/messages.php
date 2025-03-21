@@ -71,6 +71,7 @@ return [
     'Share on Twitter' => 'Twitter\'da Paylaş',
     'Share on WhatsApp' => 'WhatsApp\'ta Paylaş',
     'Share via Email' => 'E-posta ile Paylaş',
+    'Click to enlarge' => 'Büyütmek için tıklayın',
     'Check out this amazing tour: ' => 'Bu harika tura göz atın: ',
     'I thought you might be interested in this tour: ' => 'Bu turla ilgilenebileceğinizi düşündüm: ',
     
@@ -102,6 +103,18 @@ return [
     // General
     'Coco Travel' => 'Coco Travel',
     'Coco Travel - Your Journey Begins Here' => 'Coco Travel - Yolculuğunuz Burada Başlıyor',
+    'Your message has been sent successfully!' => 'Mesajınız başarıyla gönderildi!',
+    'Error sending message. Please try again.' => 'Mesaj gönderilirken hata oluştu. Lütfen tekrar deneyin.',
+    'An error occurred. Please try again later.' => 'Bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
+
+    // Search
+    'Search Results' => 'Arama Sonuçları',
+    'Found' => 'Bulundu',
+    'Result' => 'Sonuç',
+    'Results' => 'Sonuçlar',
+    'No tours found matching your search' => 'Aramanızla eşleşen tur bulunamadı',
+    'Please try different keywords or browse our' => 'Lütfen farklı anahtar kelimeler deneyin veya bizimkini gözden geçirin',
+    'tour catalog' => 'tur kataloğu',
     
     // Admin Panel
     'Admin Panel' => 'Yönetim Paneli',
@@ -149,7 +162,6 @@ return [
     'Recent Messages' => 'Son Mesajlar',
     'View All' => 'Tümünü Görüntüle',
     'No messages found' => 'Mesaj bulunamadı',
-    'No tours found.' => 'Tur bulunamadı.',
     'Add Tour' => 'Tur Ekle',
     'Add Category' => 'Kategori Ekle',
     'Manage Tours' => 'Turları Yönet',

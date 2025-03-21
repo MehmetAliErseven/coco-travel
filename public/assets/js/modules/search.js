@@ -117,18 +117,18 @@ export default class TourSearch {
                         class="tour-image" alt="${tour.title}">
                     <div class="tour-info">
                         <h5 class="tour-title">${tour.title}</h5>
-                        <span class="tour-category">${tour.category_name || 'Uncategorized'}</span>
+                        <span class="tour-category">${tour.category_name || window.translationService.translate('Uncategorized')}</span>
                     </div>
                     <div class="tour-price">
                         ${tour.price ? `$${parseFloat(tour.price).toFixed(2)}` : ''}
                     </div>
                     <a href="${this.BASE_URL}/tours/view/${tour.slug}" class="btn btn-sm btn-outline-primary ms-2">
-                        View Details
+                        ${window.translationService.translate('View Details')}
                     </a>
                 </div>
             `).join('');
         } else {
-            this.resultsContainer.innerHTML = '<div class="no-results">No tours found</div>';
+            this.resultsContainer.innerHTML = `<div class="no-results">${window.translationService.translate('No tours found')}</div>`;
         }
         
         this.resultsContainer.style.display = 'block';
@@ -152,7 +152,7 @@ export default class TourSearch {
                         </div>` : ''}
                         
                         <div class="card-body">
-                            <span class="category-badge mb-2">${tour.category_name || 'Uncategorized'}</span>
+                            <span class="category-badge mb-2">${tour.category_name || window.translationService.translate('Uncategorized')}</span>
                             <h5 class="card-title">${tour.title}</h5>
                             
                             ${tour.duration ? 
@@ -163,13 +163,15 @@ export default class TourSearch {
                             <p class="card-text">${tour.description ? tour.description.substring(0, 80) + '...' : ''}</p>
                         </div>
                         <div class="card-footer bg-white border-top-0">
-                            <a href="${this.BASE_URL}/tours/view/${tour.slug}" class="btn btn-outline-primary w-100">View Details</a>
+                            <a href="${this.BASE_URL}/tours/view/${tour.slug}" class="btn btn-outline-primary w-100">
+                                ${window.translationService.translate('View Details')}
+                            </a>
                         </div>
                     </div>
                 </div>
             `).join('');
         } else {
-            this.resultsContainer.innerHTML = '<div class="col-12 text-center alert alert-info">No tours found</div>';
+            this.resultsContainer.innerHTML = `<div class="col-12 text-center alert alert-info">${window.translationService.translate('No tours found')}</div>`;
         }
 
         // Update filtered count

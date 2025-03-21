@@ -71,6 +71,7 @@ return [
     'Share on Twitter' => 'แชร์บน Twitter',
     'Share on WhatsApp' => 'แชร์บน WhatsApp',
     'Share via Email' => 'แชร์ทางอีเมล',
+    'Click to enlarge' => 'คลิกเพื่อขยาย',
     'Check out this amazing tour: ' => 'ดูทัวร์ที่น่าสนใจนี้: ',
     'I thought you might be interested in this tour: ' => 'คิดว่าคุณอาจสนใจทัวร์นี้: ',
     
@@ -102,6 +103,18 @@ return [
     // General
     'Coco Travel' => 'Coco Travel',
     'Coco Travel - Your Journey Begins Here' => 'Coco Travel - การเดินทางของคุณเริ่มต้นที่นี่',
+    'Your message has been sent successfully!' => 'ส่งข้อความของคุณเรียบร้อยแล้ว!',
+    'Error sending message. Please try again.' => 'เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองอีกครั้ง',
+    'An error occurred. Please try again later.' => 'เกิดข้อผิดพลาด กรุณาลองอีกครั้งในภายหลัง',
+
+    // Search
+    'Search Results' => 'ผลการค้นหา',
+    'Found' => 'พบ',
+    'Result' => 'ผลลัพธ์',
+    'Results' => 'ผลลัพธ์',
+    'No tours found matching your search' => 'ไม่พบทัวร์ที่ตรงกับการค้นหาของคุณ',
+    'Please try different keywords or browse our' => 'กรุณาลองใช้คำค้นหาที่แตกต่างกันหรือเรียกดู',
+    'tour catalog' => 'แคตตาล็อกทัวร์',
     
     // Admin Panel
     'Admin Panel' => 'แผงควบคุม',
@@ -149,7 +162,6 @@ return [
     'Recent Messages' => 'ข้อความล่าสุด',
     'View All' => 'ดูทั้งหมด',
     'No messages found' => 'ไม่พบข้อความ',
-    'No tours found.' => 'ไม่พบทัวร์',
     'Add Tour' => 'เพิ่มทัวร์',
     'Add Category' => 'เพิ่มหมวดหมู่',
     'Manage Tours' => 'จัดการทัวร์',

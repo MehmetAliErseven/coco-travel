@@ -1,8 +1,35 @@
 import DynamicLoader from './modules/dynamicLoader.js';
 import TourSearch from './modules/search.js';
-import './modules/language-switcher.js'; // Dil değiştirici modülünü ekledik
+import './modules/language-switcher.js';
+import TranslationService from './modules/translation.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+// Create a global translation service instance
+window.translationService = new TranslationService();
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize all needed translations at once
+    await window.translationService.loadTranslations([
+        // Tour listing translations
+        'View Details',
+        'No tours found',
+        'Uncategorized',
+        
+        // Tour detail page translations
+        'Share on Facebook',
+        'Share on Twitter',
+        'Share on WhatsApp',
+        'Share via Email',
+        'Click to enlarge',
+        
+        // Contact form translations
+        'Your message has been sent successfully!',
+        'Error sending message. Please try again.',
+        'An error occurred. Please try again later.',
+        'Please enter your name',
+        'Please enter a valid email address',
+        'Please enter your message'
+    ]);
+
     // Initialize search module if search input or category filters exist
     if (document.querySelector('#searchInput') || document.querySelector('.category-filter')) {
         new TourSearch();
@@ -66,7 +93,7 @@ function initContactForm() {
         // Submit form via fetch API
         try {
             const formData = new FormData(contactForm);
-            const response = await fetch('/api/contact', {
+            const response = await fetch('/api/contact/submit', {
                 method: 'POST',
                 body: formData
             });
@@ -85,32 +112,30 @@ function initContactForm() {
 }
 
 function validateContactForm() {
-    // Get form fields
     const nameField = document.querySelector('#contactName');
     const emailField = document.querySelector('#contactEmail');
     const messageField = document.querySelector('#contactMessage');
     
     let isValid = true;
     
-    // Reset previous validation states
     document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
     
-    // Validate name
     if (!nameField.value.trim()) {
         nameField.classList.add('is-invalid');
+        nameField.nextElementSibling.textContent = window.translationService.translate('Please enter your name');
         isValid = false;
     }
     
-    // Validate email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(emailField.value)) {
         emailField.classList.add('is-invalid');
+        emailField.nextElementSibling.textContent = window.translationService.translate('Please enter a valid email address');
         isValid = false;
     }
     
-    // Validate message
     if (!messageField.value.trim() || messageField.value.length < 10) {
         messageField.classList.add('is-invalid');
+        messageField.nextElementSibling.textContent = window.translationService.translate('Please enter your message');
         isValid = false;
     }
     
@@ -121,9 +146,8 @@ function showFormMessage(type, message) {
     const messageContainer = document.querySelector('#formMessage');
     if (!messageContainer) return;
     
-    messageContainer.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+    messageContainer.innerHTML = `<div class="alert alert-${type}">${window.translationService.translate(message)}</div>`;
     
-    // Auto-hide success messages after 5 seconds
     if (type === 'success') {
         setTimeout(() => {
             messageContainer.innerHTML = '';

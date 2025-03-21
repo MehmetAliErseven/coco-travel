@@ -71,6 +71,7 @@ return [
     'Share on Twitter' => 'Поделиться в Twitter',
     'Share on WhatsApp' => 'Поделиться в WhatsApp',
     'Share via Email' => 'Поделиться по email',
+    'Click to enlarge' => 'Нажмите для увеличения',
     'Check out this amazing tour: ' => 'Посмотрите этот замечательный тур: ',
     'I thought you might be interested in this tour: ' => 'Я подумал(а), вам может быть интересен этот тур: ',
     
@@ -102,6 +103,18 @@ return [
     // General
     'Coco Travel' => 'Coco Travel',
     'Coco Travel - Your Journey Begins Here' => 'Coco Travel - Ваше путешествие начинается здесь',
+    'Your message has been sent successfully!' => 'Ваше сообщение успешно отправлено!',
+    'Error sending message. Please try again.' => 'Ошибка при отправке сообщения. Пожалуйста, попробуйте еще раз.',
+    'An error occurred. Please try again later.' => 'Произошла ошибка. Пожалуйста, попробуйте позже.',
+
+    // Search
+    'Search Results' => 'Результаты поиска',
+    'Found' => 'Найдено',
+    'Result' => 'Результат',
+    'Results' => 'Результаты',
+    'No tours found matching your search' => 'Не найдено туров, соответствующих вашему запросу',
+    'Please try different keywords or browse our' => 'Пожалуйста, попробуйте другие ключевые слова или просмотрите наш',
+    'tour catalog' => 'каталог туров',
     
     // Admin Panel
     'Admin Panel' => 'Панель администратора',
@@ -149,7 +162,6 @@ return [
     'Recent Messages' => 'Последние сообщения',
     'View All' => 'Показать все',
     'No messages found' => 'Сообщений не найдено',
-    'No tours found.' => 'Туры не найдены.',
     'Add Tour' => 'Добавить тур',
     'Add Category' => 'Добавить категорию',
     'Manage Tours' => 'Управление турами',

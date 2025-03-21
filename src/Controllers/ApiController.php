@@ -10,6 +10,7 @@ class ApiController extends BaseController
     private $tourModel;
     private $categoryModel;
     private $messageModel;
+    private $translationService;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class ApiController extends BaseController
         $this->tourModel = new TourModel();
         $this->categoryModel = new CategoryModel();
         $this->messageModel = new MessageModel();
+        $this->translationService = new \App\Core\TranslationService();
     }
 
     public function searchToursAction()
@@ -134,6 +136,27 @@ class ApiController extends BaseController
         
         // Return success response
         $this->jsonResponse(['success' => true, 'language' => $langCode]);
+    }
+
+    public function getTranslationsAction()
+    {
+        $keys = $_GET['keys'] ?? '';
+        if (empty($keys)) {
+            $this->jsonResponse(['success' => false, 'message' => 'No translation keys provided'], 400);
+            return;
+        }
+
+        $keys = explode(',', $keys);
+        $translations = [];
+        
+        foreach ($keys as $key) {
+            $translations[$key] = $this->translationService->trans($key);
+        }
+
+        $this->jsonResponse([
+            'success' => true,
+            'translations' => $translations
+        ]);
     }
 
     private function jsonResponse($data, $statusCode = 200)

@@ -71,6 +71,7 @@ return [
     'Share on Twitter' => 'Share on Twitter',
     'Share on WhatsApp' => 'Share on WhatsApp',
     'Share via Email' => 'Share via Email',
+    'Click to enlarge' => 'Click to enlarge',
     'Check out this amazing tour: ' => 'Check out this amazing tour: ',
     'I thought you might be interested in this tour: ' => 'I thought you might be interested in this tour: ',
     
@@ -102,6 +103,18 @@ return [
     // General
     'Coco Travel' => 'Coco Travel',
     'Coco Travel - Your Journey Begins Here' => 'Coco Travel - Your Journey Begins Here',
+    'Your message has been sent successfully!' => 'Your message has been sent successfully!',
+    'Error sending message. Please try again.' => 'Error sending message. Please try again.',
+    'An error occurred. Please try again later.' => 'An error occurred. Please try again later.',
+
+    // Search
+    'Search Results' => 'Search Results',
+    'Found' => 'Found',
+    'Result' => 'Result',
+    'Results' => 'Results',
+    'No tours found matching your search' => 'No tours found matching your search',
+    'Please try different keywords or browse our' => 'Please try different keywords or browse our',
+    'tour catalog' => 'tour catalog',
     
     // Admin Panel
     'Admin Panel' => 'Admin Panel',
@@ -149,7 +162,6 @@ return [
     'Recent Messages' => 'Recent Messages',
     'View All' => 'View All',
     'No messages found' => 'No messages found',
-    'No tours found.' => 'No tours found.',
     'Add Tour' => 'Add Tour',
     'Add Category' => 'Add Category',
     'Manage Tours' => 'Manage Tours',
