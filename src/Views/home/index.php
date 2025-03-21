@@ -1,8 +1,8 @@
 <!-- Hero Section with Search -->
 <section class="hero-section">
     <div class="hero-content">
-        <h1 class="hero-title"><?= $translator->trans('Discover Paradise') ?></h1>
-        <p class="hero-subtitle"><?= $translator->trans('Explore the world\'s most beautiful destinations with Coco Travel') ?></p>
+        <h1 class="hero-title"><?= $translator->trans('Journey Beyond Dreams') ?></h1>
+        <p class="hero-subtitle"><?= $translator->trans('Make your dream vacation come true with Coco Travel') ?></p>
         
         <div class="search-box">
             <form id="tourSearchForm" action="<?= \App\Helpers\url('home/search') ?>" method="GET">
@@ -59,7 +59,7 @@
                         
                         <?php if ($tour['duration']): ?>
                         <p class="tour-duration mb-2">
-                            <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?> <?= $translator->trans('days') ?>
+                            <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?>
                         </p>
                         <?php endif; ?>
                         
@@ -106,7 +106,7 @@
                         
                         <?php if ($tour['duration']): ?>
                         <p class="tour-duration mb-2">
-                            <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?> <?= $translator->trans('days') ?>
+                            <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?>
                         </p>
                         <?php endif; ?>
                         

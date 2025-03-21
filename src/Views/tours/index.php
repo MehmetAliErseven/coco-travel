@@ -10,8 +10,8 @@
                 <input type="text" 
                        id="searchInput" 
                        class="form-control border-start-0 rounded-end-2 ps-0 shadow-none" 
-                       placeholder="Search tours..."
-                       aria-label="Search tours">
+                       placeholder="<?= $translator->trans('Search tours') ?>..."
+                       aria-label="<?= $translator->trans('Search tours') ?>">
                 <input type="hidden" id="category-filter" name="category_id" value="all">
             </div>
         </form>
@@ -19,21 +19,23 @@
         <!-- Category Filter & Tour Count -->
         <div class="mb-4 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
             <div id="categoryFilter" class="category-filters d-flex flex-wrap gap-1">
-                <a href="#" class="btn btn-outline-primary btn-sm btn-md-normal category-filter active" data-category-id="all">All</a>
+                <a href="#" class="btn btn-outline-primary btn-sm btn-md-normal category-filter active" data-category-id="all">
+                    <?= $translator->trans('All Categories') ?>
+                </a>
                 <?php foreach ($categories as $category): ?>
                     <a href="#" class="btn btn-outline-primary btn-sm btn-md-normal category-filter" 
-                       data-category-id="<?= $category['id'] ?>"><?= $category['name'] ?></a>
+                       data-category-id="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a>
                 <?php endforeach; ?>
             </div>
             <div class="text-muted small">
-                <span class="fw-medium">Showing <?= count($tours) ?> of <?= $totalCount ?> tours</span>
+                <span class="fw-medium"><?= $translator->trans('Showing %count% tours', ['%count%' => count($tours)]) ?> of <?= $totalCount ?> tours</span>
             </div>
         </div>
 
         <!-- Tours Grid -->
         <?php if (empty($tours)): ?>
             <div class="alert alert-info">
-                <p class="mb-0">No tours available at the moment. Please check back later.</p>
+                <p class="mb-0"><?= $translator->trans('No tours found') ?>. <?= $translator->trans('Try different search criteria') ?>.</p>
             </div>
         <?php else: ?>
             <div id="toursContainer" class="row g-4">
@@ -53,7 +55,7 @@
                         <?php endif; ?>
                         
                         <div class="card-body">
-                            <span class="category-badge mb-2"><?= htmlspecialchars($tour['category_name'] ?? 'Uncategorized') ?></span>
+                            <span class="category-badge mb-2"><?= htmlspecialchars($tour['category_name'] ?? $translator->trans('Uncategorized')) ?></span>
                             <h5 class="card-title"><?= htmlspecialchars($tour['title']) ?></h5>
                             
                             <?php if ($tour['duration']): ?>
@@ -65,7 +67,9 @@
                             <p class="card-text"><?= \App\Helpers\truncate(htmlspecialchars($tour['description']), 80) ?></p>
                         </div>
                         <div class="card-footer bg-white border-top-0">
-                            <a href="<?= \App\Helpers\url('tours/view/' . $tour['slug']) ?>" class="btn btn-outline-primary w-100">View Details</a>
+                            <a href="<?= \App\Helpers\url('tours/view/' . $tour['slug']) ?>" class="btn btn-outline-primary w-100">
+                                <?= $translator->trans('View Details') ?>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -76,13 +80,15 @@
         <!-- Load More Button -->
         <?php if ($hasMoreTours): ?>
             <div class="text-center mt-4">
-                <button id="loadMoreTours" class="btn btn-primary">Load More</button>
+                <button id="loadMoreTours" class="btn btn-primary">
+                    <?= $translator->trans('Load More') ?>
+                </button>
             </div>
         <?php endif; ?>
 
         <!-- Pagination -->
         <?php if ($totalPages > 1): ?>
-        <nav class="mt-5" aria-label="Tour pagination">
+        <nav class="mt-5" aria-label="<?= $translator->trans('Tour navigation') ?>">
             <ul class="pagination justify-content-center">
                 <?php if ($currentPage > 1): ?>
                 <li class="page-item">

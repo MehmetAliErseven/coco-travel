@@ -4,13 +4,13 @@
         <div class="row g-5">
             <!-- Contact Information -->
             <div class="col-lg-5">
-                <h2 class="mb-4">Get In Touch</h2>
-                <p class="mb-4">Have questions about our tours or need more information? Contact us and our friendly team will be happy to assist you!</p>
+                <h2 class="mb-4"><?= $translator->trans('Get In Touch') ?></h2>
+                <p class="mb-4"><?= $translator->trans('Have questions about our tours or need more information? Contact us and our friendly team will be happy to assist you!') ?></p>
                 
                 <div class="contact-info-item d-flex align-items-center">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="ms-3">
-                        <h5 class="fw-bold">Our Location</h5>
+                        <h5 class="fw-bold"><?= $translator->trans('Our Location') ?></h5>
                         <p class="mb-0"><?= $translator->trans('89/5 Wichit Subdistrict, Mueang District, Phuket Province') ?></p>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                 <div class="contact-info-item d-flex align-items-center">
                     <i class="fas fa-envelope"></i>
                     <div class="ms-3">
-                        <h5 class="fw-bold">Email Us</h5>
+                        <h5 class="fw-bold"><?= $translator->trans('Email Us') ?></h5>
                         <p class="mb-0">info@cocotravel.com</p>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="contact-info-item d-flex align-items-center">
                     <i class="fas fa-phone-alt"></i>
                     <div class="ms-3">
-                        <h5 class="fw-bold">Call Us</h5>
+                        <h5 class="fw-bold"><?= $translator->trans('Call Us') ?></h5>
                         <p class="mb-0">+66 82 106 5316</p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 
-                <h4 class="mt-5 mb-3">Follow Us</h4>
+                <h4 class="mt-5 mb-3"><?= $translator->trans('Follow Us') ?></h4>
                 <div class="d-flex gap-3">
                     <a href="https://www.facebook.com/profile.php?id=61573956263143" target="_blank" class="btn btn-outline-primary btn-lg btn-social">
                         <i class="fab fa-facebook-f"></i>
@@ -64,12 +64,12 @@
             <!-- Contact Form -->
             <div class="col-lg-7">
                 <div class="contact-form p-4 bg-white shadow-sm rounded">
-                    <h2 class="mb-4">Send us a Message</h2>
+                    <h2 class="mb-4"><?= $translator->trans('Send us a Message') ?></h2>
                     
                     <?php if ($success): ?>
                     <div class="alert alert-success">
-                        <h5 class="mb-1"><i class="fas fa-check-circle me-2"></i> Thank You!</h5>
-                        <p class="mb-0">Your message has been sent successfully. We'll get back to you as soon as possible.</p>
+                        <h5 class="mb-1"><i class="fas fa-check-circle me-2"></i> <?= $translator->trans('Thank You!') ?></h5>
+                        <p class="mb-0"><?= $translator->trans('Your message has been sent successfully. We\'ll get back to you as soon as possible.') ?></p>
                     </div>
                     <?php endif; ?>
                     
@@ -85,8 +85,8 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="Your Name" value="<?= htmlspecialchars($formData['name']) ?>" required data-validation-message="Please enter your name">
-                                    <label for="name">Your Name *</label>
+                                    <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="<?= $translator->trans('Your Name') ?>" value="<?= htmlspecialchars($formData['name']) ?>" required data-validation-message="<?= $translator->trans('Please enter your name') ?>">
+                                    <label for="name"><?= $translator->trans('Your Name') ?> *</label>
                                     <?php if (isset($errors['name'])): ?>
                                     <div class="invalid-feedback">
                                         <?= $errors['name'] ?>
@@ -97,8 +97,8 @@
                             
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="Your Email" value="<?= htmlspecialchars($formData['email']) ?>" required data-validation-message="Please enter a valid email address">
-                                    <label for="email">Your Email *</label>
+                                    <input type="email" class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="<?= $translator->trans('Your Email') ?>" value="<?= htmlspecialchars($formData['email']) ?>" required data-validation-message="<?= $translator->trans('Please enter a valid email address') ?>">
+                                    <label for="email"><?= $translator->trans('Your Email') ?> *</label>
                                     <?php if (isset($errors['email'])): ?>
                                     <div class="invalid-feedback">
                                         <?= $errors['email'] ?>
@@ -109,22 +109,22 @@
                             
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Your Phone" value="<?= htmlspecialchars($formData['phone']) ?>">
-                                    <label for="phone">Your Phone (optional)</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="<?= $translator->trans('Your Phone') ?>" value="<?= htmlspecialchars($formData['phone']) ?>">
+                                    <label for="phone"><?= $translator->trans('Your Phone') ?></label>
                                 </div>
                             </div>
                             
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="<?= htmlspecialchars($formData['subject']) ?>">
-                                    <label for="subject">Subject</label>
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="<?= $translator->trans('Subject') ?>" value="<?= htmlspecialchars($formData['subject']) ?>">
+                                    <label for="subject"><?= $translator->trans('Subject') ?></label>
                                 </div>
                             </div>
                             
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control <?= isset($errors['message']) ? 'is-invalid' : '' ?>" id="message" name="message" placeholder="Your Message" style="height: 200px" required data-validation-message="Please enter your message"><?= htmlspecialchars($formData['message']) ?></textarea>
-                                    <label for="message">Your Message *</label>
+                                    <textarea class="form-control <?= isset($errors['message']) ? 'is-invalid' : '' ?>" id="message" name="message" placeholder="<?= $translator->trans('Your Message') ?>" style="height: 200px" required data-validation-message="<?= $translator->trans('Please enter your message') ?>"><?= htmlspecialchars($formData['message']) ?></textarea>
+                                    <label for="message"><?= $translator->trans('Your Message') ?> *</label>
                                     <?php if (isset($errors['message'])): ?>
                                     <div class="invalid-feedback">
                                         <?= $errors['message'] ?>
@@ -135,7 +135,7 @@
                             
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary py-3 px-4">
-                                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                                    <i class="fas fa-paper-plane me-2"></i> <?= $translator->trans('Send Message') ?>
                                 </button>
                             </div>
                         </div>

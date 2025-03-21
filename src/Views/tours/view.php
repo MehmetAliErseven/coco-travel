@@ -25,11 +25,11 @@ $extraJs = '<script type="module">
             
             <?php if ($tour['price']): ?>
             <div class="fs-5 text-success fw-bold">
-                <?= \App\Helpers\formatPrice($tour['price']) ?>
+                <?= \App\Helpers\formatPrice($tour['price']) ?> <?= $translator->trans('per person') ?>
             </div>
             <?php else: ?>
             <div class="fs-5 text-success fw-bold">
-                Price on request
+                <?= $translator->trans('Price on request') ?>
             </div>
             <?php endif; ?>
         </div>
@@ -57,7 +57,7 @@ $extraJs = '<script type="module">
 
                 <!-- Tour Description -->
                 <div class="tour-description mb-5">
-                    <h3 class="mb-3">Tour Description</h3>
+                    <h3 class="mb-3"><?= $translator->trans('Tour Description') ?></h3>
                     <div class="tour-description-content">
                         <?= nl2br(htmlspecialchars($tour['description'])) ?>
                     </div>
@@ -66,7 +66,7 @@ $extraJs = '<script type="module">
                 <!-- Tour Itinerary -->
                 <?php if (!empty($tour['itinerary'])): ?>
                 <div class="tour-itinerary mb-5">
-                    <h3 class="mb-3">Itinerary</h3>
+                    <h3 class="mb-3"><?= $translator->trans('Itinerary') ?></h3>
                     <div class="tour-itinerary-content">
                         <?= nl2br(htmlspecialchars($tour['itinerary'])) ?>
                     </div>
@@ -76,7 +76,7 @@ $extraJs = '<script type="module">
                 <!-- What's Included -->
                 <?php if (!empty($tour['includes'])): ?>
                 <div class="tour-includes mb-5">
-                    <h3 class="mb-3">What's Included</h3>
+                    <h3 class="mb-3"><?= $translator->trans('What\'s Included') ?></h3>
                     <div class="tour-includes-content">
                         <?php 
                         $includes = explode("\n", $tour['includes']);
@@ -105,10 +105,10 @@ $extraJs = '<script type="module">
                 <!-- Book Now Card -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
-                        <h4 class="card-title">Interested in this tour?</h4>
-                        <p class="card-text">Contact us to book this tour or request more information.</p>
+                        <h4 class="card-title"><?= $translator->trans('Interested in this tour?') ?></h4>
+                        <p class="card-text"><?= $translator->trans('Contact us to book this tour or request more information.') ?></p>
                         <a href="<?= \App\Helpers\url('contact?tour=' . urlencode($tour['title'])) ?>" class="btn btn-primary w-100">
-                            <i class="fas fa-envelope me-2"></i> Contact Us
+                            <i class="fas fa-envelope me-2"></i> <?= $translator->trans('Contact Us') ?>
                         </a>
                     </div>
                 </div>
@@ -116,22 +116,22 @@ $extraJs = '<script type="module">
                 <!-- Share Tour -->
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
-                        <h4 class="card-title">Share This Tour</h4>
+                        <h4 class="card-title"><?= $translator->trans('Share This Tour') ?></h4>
                         <div class="d-flex justify-content-between mt-3">
                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode(\App\Helpers\url('tours/view/' . $tour['slug'])) ?>" 
-                               class="btn btn-outline-primary social-share-btn" title="Share on Facebook">
+                               class="btn btn-outline-primary social-share-btn" title="<?= $translator->trans('Share on Facebook') ?>">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="https://twitter.com/intent/tweet?url=<?= urlencode(\App\Helpers\url('tours/view/' . $tour['slug'])) ?>&text=<?= urlencode('Check out this amazing tour: ' . $tour['title']) ?>" 
-                               class="btn btn-outline-info social-share-btn" title="Share on Twitter">
+                            <a href="https://twitter.com/intent/tweet?url=<?= urlencode(\App\Helpers\url('tours/view/' . $tour['slug'])) ?>&text=<?= urlencode($translator->trans('Check out this amazing tour: ') . $tour['title']) ?>" 
+                               class="btn btn-outline-info social-share-btn" title="<?= $translator->trans('Share on Twitter') ?>">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="https://api.whatsapp.com/send?text=<?= urlencode('Check out this amazing tour: ' . $tour['title'] . ' - ' . \App\Helpers\url('tours/view/' . $tour['slug'])) ?>" 
-                               class="btn btn-outline-success social-share-btn" title="Share on WhatsApp">
+                            <a href="https://api.whatsapp.com/send?text=<?= urlencode($translator->trans('Check out this amazing tour: ') . $tour['title'] . ' - ' . \App\Helpers\url('tours/view/' . $tour['slug'])) ?>" 
+                               class="btn btn-outline-success social-share-btn" title="<?= $translator->trans('Share on WhatsApp') ?>">
                                 <i class="fab fa-whatsapp"></i>
                             </a>
-                            <a href="mailto:?subject=<?= urlencode('Check out this amazing tour: ' . $tour['title']) ?>&body=<?= urlencode('I thought you might be interested in this tour: ' . \App\Helpers\url('tours/view/' . $tour['slug'])) ?>" 
-                               class="btn btn-outline-secondary" title="Share via Email">
+                            <a href="mailto:?subject=<?= urlencode($translator->trans('Check out this amazing tour: ') . $tour['title']) ?>&body=<?= urlencode($translator->trans('I thought you might be interested in this tour: ') . \App\Helpers\url('tours/view/' . $tour['slug'])) ?>" 
+                               class="btn btn-outline-secondary" title="<?= $translator->trans('Share via Email') ?>">
                                 <i class="fas fa-envelope"></i>
                             </a>
                         </div>
@@ -146,7 +146,7 @@ $extraJs = '<script type="module">
 <?php if (!empty($relatedTours)): ?>
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="section-title">Related Tours</h2>
+        <h2 class="section-title"><?= $translator->trans('Related Tours') ?></h2>
         
         <div class="row g-4">
             <?php foreach ($relatedTours as $relatedTour): ?>
@@ -177,7 +177,9 @@ $extraJs = '<script type="module">
                         <p class="card-text"><?= \App\Helpers\truncate(htmlspecialchars($relatedTour['description']), 100) ?></p>
                     </div>
                     <div class="card-footer bg-white border-top-0">
-                        <a href="<?= \App\Helpers\url('tours/view/' . $relatedTour['slug']) ?>" class="btn btn-outline-primary w-100">View Details</a>
+                        <a href="<?= \App\Helpers\url('tours/view/' . $relatedTour['slug']) ?>" class="btn btn-outline-primary w-100">
+                            <?= $translator->trans('View Details') ?>
+                        </a>
                     </div>
                 </div>
             </div>

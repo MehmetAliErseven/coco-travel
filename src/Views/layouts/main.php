@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($pageTitle) && $pageTitle ? $pageTitle . ' - Coco Travel' : 'Coco Travel - Your Journey Begins Here' ?></title>
+    <title><?= isset($pageTitle) && $pageTitle ? $pageTitle . ' - ' . $translator->trans('Coco Travel') : $translator->trans('Coco Travel - Your Journey Begins Here') ?></title>
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="<?= \App\Helpers\asset('images/favicon/favicon.ico') ?>">
