@@ -1,13 +1,10 @@
 <?php
 /**
  * Bootstrap file for Coco Travel Application
- * 
- * This file initializes the application, sets up error handling,
- * and loads any global configurations
  */
 
 // Error reporting based on environment
-if ($_ENV['APP_ENV'] === 'development') {
+if (isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'development') {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);

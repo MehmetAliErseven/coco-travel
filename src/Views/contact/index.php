@@ -11,7 +11,7 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="ms-3">
                         <h5 class="fw-bold">Our Location</h5>
-                        <p class="mb-0">123 Travel Street, City, Country</p>
+                        <p class="mb-0"><?= $translator->trans('89/5 Wichit Subdistrict, Mueang District, Phuket Province') ?></p>
                     </div>
                 </div>
                 
@@ -27,7 +27,7 @@
                     <i class="fas fa-phone-alt"></i>
                     <div class="ms-3">
                         <h5 class="fw-bold">Call Us</h5>
-                        <p class="mb-0">+1 (555) 123-4567</p>
+                        <p class="mb-0">+66 82 106 5316</p>
                     </div>
                 </div>
                 
@@ -35,7 +35,7 @@
                     <i class="fab fa-whatsapp"></i>
                     <div class="ms-3">
                         <h5 class="fw-bold">WhatsApp</h5>
-                        <p class="mb-0">+1 (555) 987-6543</p>
+                        <p class="mb-0">+66 82 106 5316</p>
                     </div>
                 </div>
                 
@@ -43,7 +43,7 @@
                     <i class="fab fa-line"></i>
                     <div class="ms-3">
                         <h5 class="fw-bold">Line</h5>
-                        <p class="mb-0">@cocotravel</p>
+                        <p class="mb-0">+66 82 106 5316</p>
                     </div>
                 </div>
                 
@@ -153,7 +153,7 @@
 <section class="py-3">
     <div class="container">
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253079.7119716947!2d98.29052921602849!3d7.643247257874613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304fd719c388d725%3A0x52422d41f3a1f3dc!2sRawai%2C%20Mueang%20Phuket%20District%2C%20Phuket%2C%20Tayland!5e0!3m2!1str!2str!4v1742498046111!5m2!1str!2str" 
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.2420622347636!2d98.3688930756852!3d7.869719906055685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30502e23d1648177%3A0xc263fa8c2b5705c7!2s89%20Soi%206%2C%20Tambon%20Wichit%2C%20Amphoe%20Mueang%20Phuket%2C%20Chang%20Wat%20Phuket%2083000%2C%20Tayland!5e0!3m2!1str!2str!4v1742566779151!5m2!1str!2str" 
                 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>

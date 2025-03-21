@@ -12,7 +12,7 @@ return [
     'Your premier destination for extraordinary travel experiences. We specialize in curated adventures that create memories to last a lifetime.' => 'จุดหมายปลายทางชั้นเยี่ยมสำหรับประสบการณ์การเดินทางที่พิเศษ เราเชี่ยวชาญในการจัดการผจญภัยที่สร้างความทรงจำตลอดชีวิต',
     'Quick Links' => 'ลิงค์ด่วน',
     'Contact Info' => 'ข้อมูลติดต่อ',
-    '123 Travel Street, City, Country' => '123 ถนนท่องเที่ยว, เมือง, ประเทศ',
+    '89/5 Wichit Subdistrict, Mueang District, Phuket Province' => '89/5 หมู่ที่ 6 ตำบลวิชิต อำเภอเมืองภูเก็ต จังหวัดภูเก็ต',
     '© %year% Coco Travel. All rights reserved.' => '© %year% Coco Travel สงวนลิขสิทธิ์',
     
     // Home Page

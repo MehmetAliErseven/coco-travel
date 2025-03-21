@@ -118,7 +118,7 @@ class ApiController extends BaseController
         $langCode = $_GET['lang'] ?? null;
         
         // Supported languages
-        $supportedLanguages = ['en', 'th', 'tr'];
+        $supportedLanguages = ['en', 'th', 'tr', 'ru'];
         
         // Validate the language code
         if (!$langCode || !in_array($langCode, $supportedLanguages)) {
@@ -128,6 +128,9 @@ class ApiController extends BaseController
         
         // Set the language in the session
         $_SESSION['lang'] = $langCode;
+        
+        // Set cookie for persistent language preference (30 days)
+        setcookie('preferred_language', $langCode, time() + (86400 * 30), '/');
         
         // Return success response
         $this->jsonResponse(['success' => true, 'language' => $langCode]);

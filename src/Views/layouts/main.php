@@ -67,13 +67,51 @@
                         <a class="nav-link" href="<?= \App\Config\Config::getAppUrl() ?>/contact"><?= $translator->trans('Contact Us') ?></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-globe"></i> <?= $translator->trans('Language') ?>
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php
+                            $flags = [
+                                'en' => 'en.svg',
+                                'th' => 'th.svg',
+                                'tr' => 'tr.svg',
+                                'ru' => 'ru.svg'
+                            ];
+                            $labels = [
+                                'en' => 'English',
+                                'th' => 'ไทย',
+                                'tr' => 'Türkçe',
+                                'ru' => 'Русский'
+                            ];
+                            $currentFlag = $flags[$lang] ?? 'en.svg';
+                            $currentLabel = $labels[$lang] ?? 'English';
+                            ?>
+                            <img src="<?= \App\Helpers\asset('images/flags/' . $currentFlag) ?>" alt="<?= $currentLabel ?>" class="me-2" style="width: 20px; height: 15px; object-fit: contain;">
+                            <span><?= $currentLabel ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item language-switcher <?= ($lang == 'en') ? 'active' : '' ?>" href="#" data-lang="en"><?= ($lang == 'en') ? '✓ ' : '' ?>English</a></li>
-                            <li><a class="dropdown-item language-switcher <?= ($lang == 'th') ? 'active' : '' ?>" href="#" data-lang="th"><?= ($lang == 'th') ? '✓ ' : '' ?>ไทย (Thai)</a></li>
-                            <li><a class="dropdown-item language-switcher <?= ($lang == 'tr') ? 'active' : '' ?>" href="#" data-lang="tr"><?= ($lang == 'tr') ? '✓ ' : '' ?>Türkçe (Turkish)</a></li>
+                            <li>
+                                <a class="dropdown-item language-switcher d-flex align-items-center <?= ($lang == 'en') ? 'active' : '' ?>" href="#" data-lang="en">
+                                    <img src="<?= \App\Helpers\asset('images/flags/en.svg') ?>" alt="English" class="me-2" style="width: 20px; height: 15px; object-fit: contain;">
+                                    English
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item language-switcher d-flex align-items-center <?= ($lang == 'th') ? 'active' : '' ?>" href="#" data-lang="th">
+                                    <img src="<?= \App\Helpers\asset('images/flags/th.svg') ?>" alt="ไทย" class="me-2" style="width: 20px; height: 15px; object-fit: contain;">
+                                    ไทย
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item language-switcher d-flex align-items-center <?= ($lang == 'tr') ? 'active' : '' ?>" href="#" data-lang="tr">
+                                    <img src="<?= \App\Helpers\asset('images/flags/tr.svg') ?>" alt="Türkçe" class="me-2" style="width: 20px; height: 15px; object-fit: contain;">
+                                    Türkçe
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item language-switcher d-flex align-items-center <?= ($lang == 'ru') ? 'active' : '' ?>" href="#" data-lang="ru">
+                                    <img src="<?= \App\Helpers\asset('images/flags/ru.svg') ?>" alt="Русский" class="me-2" style="width: 20px; height: 15px; object-fit: contain;">
+                                    Русский
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -114,11 +152,11 @@
                 <div class="col-md-4">
                     <h3 class="mb-4"><?= $translator->trans('Contact Info') ?></h3>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> <?= $translator->trans('123 Travel Street, City, Country') ?></li>
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> <?= $translator->trans('89/5 Wichit Subdistrict, Mueang District, Phuket Province') ?></li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +66 82 106 5316</li>
                         <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@cocotravel.com</li>
-                        <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +1 (555) 987-6543</li>
-                        <li class="mb-2"><i class="fab fa-line me-2"></i> @cocotravel</li>
+                        <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +66 82 106 5316</li>
+                        <li class="mb-2"><i class="fab fa-line me-2"></i> +66 82 106 5316</li>
                     </ul>
                 </div>
             </div>
