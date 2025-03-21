@@ -47,7 +47,7 @@ return [
     'No tours found' => 'Tur bulunamadı',
     'Try different search criteria' => 'Farklı arama kriterleri deneyin',
     'Search tours' => 'Turları ara',
-    'Showing %count% tours' => '%count% tur gösteriliyor',
+    'Showing %filtered_count% of %total_count% tours' => '%filtered_count% / %total_count% tur gösteriliyor',
     'Load More' => 'Daha Fazla Yükle',
     'Tour navigation' => 'Tur navigasyonu',
     'Uncategorized' => 'Kategorisiz',

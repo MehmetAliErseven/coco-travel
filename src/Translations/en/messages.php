@@ -47,7 +47,7 @@ return [
     'No tours found' => 'No tours found',
     'Try different search criteria' => 'Try different search criteria',
     'Search tours' => 'Search tours',
-    'Showing %count% tours' => 'Showing %count% tours',
+    'Showing %filtered_count% of %total_count% tours' => 'Showing %filtered_count% of %total_count% tours',
     'Load More' => 'Load More',
     'Tour navigation' => 'Tour navigation',
     'Uncategorized' => 'Uncategorized',

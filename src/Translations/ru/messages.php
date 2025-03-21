@@ -47,7 +47,7 @@ return [
     'No tours found' => 'Туры не найдены',
     'Try different search criteria' => 'Попробуйте другие критерии поиска',
     'Search tours' => 'Поиск туров',
-    'Showing %count% tours' => 'Показано туров: %count%',
+    'Showing %filtered_count% of %total_count% tours' => 'Показано %filtered_count% из %total_count% туров',
     'Load More' => 'Загрузить еще',
     'Tour navigation' => 'Навигация по турам',
     'Uncategorized' => 'Без категории',

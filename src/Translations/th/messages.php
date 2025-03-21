@@ -47,7 +47,7 @@ return [
     'No tours found' => 'ไม่พบทัวร์',
     'Try different search criteria' => 'ลองเกณฑ์การค้นหาอื่น',
     'Search tours' => 'ค้นหาทัวร์',
-    'Showing %count% tours' => 'แสดง %count% ทัวร์',
+    'Showing %filtered_count% of %total_count% tours' => 'แสดง %filtered_count% จาก %total_count% ทัวร์',
     'Load More' => 'โหลดเพิ่มเติม',
     'Tour navigation' => 'การนำทางทัวร์',
     'Uncategorized' => 'ไม่มีหมวดหมู่',

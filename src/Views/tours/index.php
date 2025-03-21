@@ -28,7 +28,10 @@
                 <?php endforeach; ?>
             </div>
             <div class="text-muted small">
-                <span class="fw-medium"><?= $translator->trans('Showing %count% tours', ['%count%' => count($tours)]) ?> of <?= $totalCount ?> tours</span>
+                <span class="fw-medium"><?= $translator->trans('Showing %filtered_count% of %total_count% tours', [
+                    '%filtered_count%' => '<span id="filteredCount">' . count($tours) . '</span>',
+                    '%total_count%' => $totalCount
+                ]) ?></span>
             </div>
         </div>
 

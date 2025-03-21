@@ -7,11 +7,9 @@ export default class TourSearch {
         this.categorySelect = this.searchForm.querySelector('#category-filter');
         this.categoryButtons = document.querySelectorAll('.category-filter');
         this.resultsContainer = document.querySelector('#toursContainer') || document.querySelector('#live-search-results');
-        this.countInfo = document.querySelector('.text-muted span');
         
         this.BASE_URL = window.basePath || '';
         this.originalContent = this.resultsContainer ? this.resultsContainer.innerHTML : '';
-        this.originalCount = this.countInfo ? this.countInfo.textContent : '';
         this.selectedCategoryId = this.categorySelect ? this.categorySelect.value : 'all';
         
         // Determine if we're on the home page
@@ -70,17 +68,6 @@ export default class TourSearch {
         if (this.isHomePage && !query) {
             if (this.resultsContainer) {
                 this.resultsContainer.style.display = 'none';
-            }
-            return;
-        }
-
-        // Handle empty search and all category on tours page
-        if (!this.isHomePage && !query && this.selectedCategoryId === 'all') {
-            if (this.resultsContainer && this.originalContent) {
-                this.resultsContainer.innerHTML = this.originalContent;
-            }
-            if (this.countInfo && this.originalCount) {
-                this.countInfo.textContent = this.originalCount;
             }
             return;
         }
@@ -182,12 +169,13 @@ export default class TourSearch {
                 </div>
             `).join('');
         } else {
-            this.resultsContainer.innerHTML = '<div class="col-12 text-center">No tours found</div>';
+            this.resultsContainer.innerHTML = '<div class="col-12 text-center alert alert-info">No tours found</div>';
         }
 
-        // Update tour count info
-        if (this.countInfo) {
-            this.countInfo.textContent = `Showing ${filteredCount} of ${totalCount} tours`;
+        // Update filtered count
+        const filteredCountSpan = document.getElementById('filteredCount');
+        if (filteredCountSpan) {
+            filteredCountSpan.textContent = filteredCount;
         }
     }
 }
