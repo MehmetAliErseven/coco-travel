@@ -1,7 +1,3 @@
-<?php
-    $this->layout('admin/layouts/main');
-?>
-
 <!-- Stats Cards -->
 <div class="row">
     <div class="col-md-3 mb-4">

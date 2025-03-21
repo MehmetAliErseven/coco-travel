@@ -8,6 +8,17 @@ namespace App\Controllers;
  */
 abstract class BaseController
 {
+    protected $layout = 'layouts/main';
+
+    /**
+     * Set the layout for the view
+     */
+    protected function layout($layout)
+    {
+        $this->layout = $layout;
+        return $this;
+    }
+
     /**
      * Render a view with data
      * 
@@ -40,7 +51,12 @@ abstract class BaseController
         $content = ob_get_clean();
         
         // Include the layout with the content
-        include BASE_PATH . "/src/Views/layouts/main.php";
+        $layoutPath = BASE_PATH . "/src/Views/{$this->layout}.php";
+        if (file_exists($layoutPath)) {
+            include $layoutPath;
+        } else {
+            throw new \App\Exceptions\NotFoundException("Layout {$this->layout} not found");
+        }
     }
     
     /**

@@ -56,9 +56,22 @@ class Database
      */
     public function query($sql, $params = [])
     {
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
+        try {
+            $stmt = $this->connection->prepare($sql);
+            
+            // Handle array parameters
+            foreach ($params as $key => $value) {
+                if (is_array($value)) {
+                    $value = json_encode($value);
+                }
+                $stmt->bindValue(":$key", $value);
+            }
+            
+            $stmt->execute();
+            return $stmt;
+        } catch (\PDOException $e) {
+            throw new \PDOException("Query failed: " . $e->getMessage());
+        }
     }
     
     /**

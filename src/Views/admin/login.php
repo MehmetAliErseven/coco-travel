@@ -31,7 +31,7 @@
                 </div>
                 <?php endif; ?>
                 
-                <form id="loginForm" action="<?= \App\Helpers\url('admin/auth/login') ?>" method="POST">
+                <form id="loginForm" action="<?= \App\Helpers\url('admin/authenticate') ?>" method="POST">
                     <input type="hidden" name="csrf_token" value="<?= \App\Helpers\generateCsrfToken() ?>">
                     
                     <div class="mb-3">

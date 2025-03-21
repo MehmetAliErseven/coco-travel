@@ -6,6 +6,8 @@ use App\Middleware\AuthMiddleware;
 
 abstract class BaseAdminController extends BaseController
 {
+    protected $layout = 'admin/layouts/main';
+
     protected function __construct()
     {
         // Skip auth check for login-related actions

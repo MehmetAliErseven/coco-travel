@@ -30,10 +30,11 @@ class DashboardController extends BaseAdminController
         
         $recentMessages = $this->messageModel->getRecentMessages();
         
-        $this->render('admin/dashboard', [
-            'pageTitle' => 'Admin Dashboard',
-            'stats' => $stats,
-            'recentMessages' => $recentMessages
+        $this->layout('admin/layouts/main')
+             ->render('admin/dashboard', [
+                'pageTitle' => 'Admin Dashboard',
+                'stats' => $stats,
+                'recentMessages' => $recentMessages
         ]);
     }
 }

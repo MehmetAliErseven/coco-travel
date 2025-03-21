@@ -6,6 +6,7 @@ return [
     'tours/view/{slug}' => ['controller' => 'Tours', 'action' => 'view'],
     
     // API Routes
+    'api/generate-password-hash' => ['controller' => 'Api', 'action' => 'generatePasswordHash'],
     'api/tours/search' => ['controller' => 'Api', 'action' => 'searchTours'],
     'api/tours/category/{id}' => ['controller' => 'Api', 'action' => 'getToursByCategory'],
     'api/tours/page/{page}' => ['controller' => 'Api', 'action' => 'getToursByPage'],

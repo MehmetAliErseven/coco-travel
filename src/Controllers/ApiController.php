@@ -159,6 +159,19 @@ class ApiController extends BaseController
         ]);
     }
 
+    public function generatePasswordHashAction()
+    {
+        $password = $_GET['password'] ?? null;
+        
+        if (!$password) {
+            echo json_encode(['error' => 'Password parameter is required']);
+            return;
+        }
+        
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        echo json_encode(['hash' => $hashedPassword]);
+    }
+
     private function jsonResponse($data, $statusCode = 200)
     {
         http_response_code($statusCode);
