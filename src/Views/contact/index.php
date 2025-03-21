@@ -49,17 +49,14 @@
                 
                 <h4 class="mt-5 mb-3">Follow Us</h4>
                 <div class="d-flex gap-3">
-                    <a href="#" class="btn btn-outline-primary btn-lg btn-social">
+                    <a href="https://www.facebook.com/profile.php?id=61573956263143" target="_blank" class="btn btn-outline-primary btn-lg btn-social">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="btn btn-outline-info btn-lg btn-social">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="btn btn-outline-danger btn-lg btn-social">
+                    <a href="https://www.instagram.com/cocotravel.agency/#" target="_blank" class="btn btn-outline-danger btn-lg btn-social">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="btn btn-outline-danger btn-lg btn-social">
-                        <i class="fab fa-youtube"></i>
+                    <a href="https://www.tiktok.com/@cocotravel4?_t=ZS-8uVUjrTgUxm&_r=1" target="_blank" class="btn btn-outline-dark btn-lg btn-social">
+                        <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
             </div>

@@ -134,10 +134,9 @@
                     </div>
                     <p><?= $translator->trans('Your premier destination for extraordinary travel experiences. We specialize in curated adventures that create memories to last a lifetime.') ?></p>
                     <div class="social-links mt-4">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61573956263143" target="_blank" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/cocotravel.agency/#" target="_blank" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@cocotravel4?_t=ZS-8uVUjrTgUxm&_r=1" target="_blank" class="text-white me-3"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
@@ -156,11 +155,10 @@
                         <li class="mb-2"><i class="fas fa-phone me-2"></i> +66 82 106 5316</li>
                         <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@cocotravel.com</li>
                         <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +66 82 106 5316</li>
-                        <li class="mb-2"><i class="fab fa-line me-2"></i> +66 82 106 5316</li>
                     </ul>
                 </div>
             </div>
-            <hr class="my-4">
+            <hr class="mt-3 mb-4">
             <div class="row">
                 <div class="col-12 text-center">
                     <p class="mb-0"><?= $translator->trans('© %year% Coco Travel. All rights reserved.', ['%year%' => date('Y')]) ?></p>
