@@ -82,16 +82,18 @@
                     <form action="<?= \App\Helpers\url('contact/submit') ?>" method="POST" id="contactForm" class="needs-validation" novalidate>
                         <input type="hidden" name="csrf_token" value="<?= \App\Helpers\generateCsrfToken() ?>">
                         
+                        <div id="formMessage" class="mb-3">
+                            <!-- Dynamic messages will be inserted here -->
+                        </div>
+                        
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" id="name" name="name" placeholder="<?= $translator->trans('Your Name') ?>" value="<?= htmlspecialchars($formData['name']) ?>" required data-validation-message="<?= $translator->trans('Please enter your name') ?>">
                                     <label for="name"><?= $translator->trans('Your Name') ?> *</label>
-                                    <?php if (isset($errors['name'])): ?>
                                     <div class="invalid-feedback">
-                                        <?= $errors['name'] ?>
+                                        <?= $errors['name'] ?? '' ?>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                             
@@ -99,11 +101,9 @@
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" id="email" name="email" placeholder="<?= $translator->trans('Your Email') ?>" value="<?= htmlspecialchars($formData['email']) ?>" required data-validation-message="<?= $translator->trans('Please enter a valid email address') ?>">
                                     <label for="email"><?= $translator->trans('Your Email') ?> *</label>
-                                    <?php if (isset($errors['email'])): ?>
                                     <div class="invalid-feedback">
-                                        <?= $errors['email'] ?>
+                                        <?= $errors['email'] ?? '' ?>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                             
@@ -125,11 +125,9 @@
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control <?= isset($errors['message']) ? 'is-invalid' : '' ?>" id="message" name="message" placeholder="<?= $translator->trans('Your Message') ?>" style="height: 200px" required data-validation-message="<?= $translator->trans('Please enter your message') ?>"><?= htmlspecialchars($formData['message']) ?></textarea>
                                     <label for="message"><?= $translator->trans('Your Message') ?> *</label>
-                                    <?php if (isset($errors['message'])): ?>
                                     <div class="invalid-feedback">
-                                        <?= $errors['message'] ?>
+                                        <?= $errors['message'] ?? '' ?>
                                     </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                             

@@ -1,3 +1,7 @@
+<?php
+    $this->layout('admin/layouts/main');
+?>
+
 <!-- Stats Cards -->
 <div class="row">
     <div class="col-md-3 mb-4">
@@ -78,15 +82,15 @@
                             <a href="<?= \App\Helpers\url('admin/messages/view/' . $message['id']) ?>" class="list-group-item list-group-item-action">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-1">
-                                        <?= htmlspecialchars($message['name']) ?>
+                                        <?= htmlspecialchars($message['name'] ?? '') ?>
                                         <?php if ($message['is_read'] == 0): ?>
                                             <span class="badge bg-danger rounded-pill ms-2">New</span>
                                         <?php endif; ?>
                                     </h6>
                                     <small><?= date('M d, Y', strtotime($message['created_at'])) ?></small>
                                 </div>
-                                <p class="mb-1 text-truncate"><?= htmlspecialchars($message['subject']) ?></p>
-                                <small class="text-muted"><?= htmlspecialchars($message['email']) ?></small>
+                                <p class="mb-1 text-truncate"><?= !empty($message['subject']) ? htmlspecialchars($message['subject']) : '<span class="text-muted">No subject</span>' ?></p>
+                                <small class="text-muted"><?= htmlspecialchars($message['email'] ?? '') ?></small>
                             </a>
                         <?php endforeach; ?>
                     </div>

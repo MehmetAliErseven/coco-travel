@@ -19,18 +19,16 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted">From</label>
-                            <div class="fw-medium"><?= htmlspecialchars($message['name']) ?></div>
+                            <div class="fw-medium"><?= htmlspecialchars($message['name'] ?? '') ?></div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted">Email</label>
-                            <div class="fw-medium"><?= htmlspecialchars($message['email']) ?></div>
+                            <div class="fw-medium"><?= htmlspecialchars($message['email'] ?? '') ?></div>
                         </div>
-                        <?php if (!empty($message['phone'])): ?>
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted">Phone</label>
-                            <div class="fw-medium"><?= htmlspecialchars($message['phone']) ?></div>
+                            <div class="fw-medium"><?= !empty($message['phone']) ? htmlspecialchars($message['phone']) : '<span class="text-muted">Not provided</span>' ?></div>
                         </div>
-                        <?php endif; ?>
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted">Date</label>
                             <div class="fw-medium"><?= date('M d, Y H:i', strtotime($message['created_at'])) ?></div>
@@ -41,13 +39,13 @@
                 <div class="mb-4">
                     <h5>Subject</h5>
                     <hr>
-                    <p class="mb-0"><?= htmlspecialchars($message['subject']) ?></p>
+                    <p class="mb-0"><?= !empty($message['subject']) ? htmlspecialchars($message['subject']) : '<span class="text-muted">No subject</span>' ?></p>
                 </div>
 
                 <div>
                     <h5>Message</h5>
                     <hr>
-                    <p class="mb-0"><?= nl2br(htmlspecialchars($message['message'])) ?></p>
+                    <p class="mb-0"><?= nl2br(htmlspecialchars($message['message'] ?? '')) ?></p>
                 </div>
             </div>
         </div>
@@ -57,9 +55,14 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-body">
                 <h5 class="mb-3">Quick Actions</h5>
-                <a href="mailto:<?= htmlspecialchars($message['email']) ?>" class="btn btn-primary w-100 mb-2">
+                <a href="mailto:<?= htmlspecialchars($message['email'] ?? '') ?>" class="btn btn-primary w-100 mb-2">
                     <i class="fas fa-reply me-2"></i>Reply via Email
                 </a>
+                <?php if (!empty($message['phone'])): ?>
+                <a href="tel:<?= htmlspecialchars($message['phone']) ?>" class="btn btn-outline-primary w-100 mb-2">
+                    <i class="fas fa-phone me-2"></i>Call
+                </a>
+                <?php endif; ?>
                 <button type="button" 
                         class="btn btn-outline-danger w-100" 
                         data-bs-toggle="modal" 

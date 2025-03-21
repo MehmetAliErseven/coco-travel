@@ -112,9 +112,9 @@ function initContactForm() {
 }
 
 function validateContactForm() {
-    const nameField = document.querySelector('#contactName');
-    const emailField = document.querySelector('#contactEmail');
-    const messageField = document.querySelector('#contactMessage');
+    const nameField = document.querySelector('#name');
+    const emailField = document.querySelector('#email');
+    const messageField = document.querySelector('#message');
     
     let isValid = true;
     
@@ -122,20 +122,20 @@ function validateContactForm() {
     
     if (!nameField.value.trim()) {
         nameField.classList.add('is-invalid');
-        nameField.nextElementSibling.textContent = window.translationService.translate('Please enter your name');
+        nameField.closest('.form-floating').querySelector('.invalid-feedback').textContent = window.translationService.translate('Please enter your name');
         isValid = false;
     }
     
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(emailField.value)) {
         emailField.classList.add('is-invalid');
-        emailField.nextElementSibling.textContent = window.translationService.translate('Please enter a valid email address');
+        emailField.closest('.form-floating').querySelector('.invalid-feedback').textContent = window.translationService.translate('Please enter a valid email address');
         isValid = false;
     }
     
-    if (!messageField.value.trim() || messageField.value.length < 10) {
+    if (!messageField.value.trim()) {
         messageField.classList.add('is-invalid');
-        messageField.nextElementSibling.textContent = window.translationService.translate('Please enter your message');
+        messageField.closest('.form-floating').querySelector('.invalid-feedback').textContent = window.translationService.translate('Please enter your message');
         isValid = false;
     }
     
