@@ -74,7 +74,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a href="<?= \App\Helpers\url('tours/' . $tour['slug']) ?>" 
+                                        <a href="<?= \App\Helpers\url('tours/view/' . $tour['slug']) ?>" 
                                            target="_blank"
                                            class="btn btn-outline-primary" 
                                            title="View">
@@ -90,7 +90,7 @@
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#deleteTourModal<?= $tour['id'] ?>"
                                                 title="Delete">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </div>
                                     

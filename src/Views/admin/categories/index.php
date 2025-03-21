@@ -47,12 +47,12 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <div class="btn-group">
-                                        <a href="<?= \App\Helpers\url('admin/categories/edit/' . $category['id']) ?>" class="btn btn-sm btn-outline-primary" title="Edit">
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="<?= \App\Helpers\url('admin/categories/edit/' . $category['id']) ?>" class="btn btn-outline-primary" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <?php if ($category['tour_count'] == 0): ?>
-                                            <a href="#" class="btn btn-sm btn-outline-danger" 
+                                            <a href="#" class="btn btn-outline-danger" 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#deleteModal" 
                                                 data-id="<?= $category['id'] ?>"
@@ -61,7 +61,7 @@
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
                                         <?php else: ?>
-                                            <button class="btn btn-sm btn-outline-danger" disabled title="Cannot delete - has tours">
+                                            <button class="btn btn-outline-danger" disabled title="Cannot delete - has tours">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         <?php endif; ?>

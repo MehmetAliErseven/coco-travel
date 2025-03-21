@@ -16,8 +16,9 @@ body.admin-layout {
   color: #fff;
   position: fixed;
   height: 100vh;
-  transition: width 0.3s;
+  transition: all 0.3s ease;
   z-index: 1000;
+  overflow-x: hidden;
 }
 
 .sidebar-collapsed {
@@ -30,17 +31,26 @@ body.admin-layout {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sidebar-header:hover {
+  background-color: rgba(255,255,255,0.1);
 }
 
 .sidebar-brand {
   font-weight: bold;
   font-size: 1.5rem;
   white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .sidebar-toggle {
   cursor: pointer;
   color: rgba(255,255,255,0.7);
+  z-index: 2;
 }
 
 .sidebar-menu {
@@ -51,6 +61,7 @@ body.admin-layout {
 
 .sidebar-menu li {
   margin-bottom: 0.2rem;
+  position: relative;
 }
 
 .sidebar-menu a {
@@ -59,7 +70,8 @@ body.admin-layout {
   align-items: center;
   padding: 0.75rem 1rem;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .sidebar-menu a:hover, 
@@ -72,10 +84,20 @@ body.admin-layout {
   min-width: 25px;
   margin-right: 10px;
   font-size: 1.1rem;
+  text-align: center;
 }
 
 .sidebar-menu-text {
-  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-collapsed .sidebar-menu-text {
+  opacity: 0;
+}
+
+.sidebar-collapsed .sidebar-brand span {
+  opacity: 0;
 }
 
 .sidebar-divider {
@@ -87,7 +109,9 @@ body.admin-layout {
 .main-content {
   flex: 1;
   margin-left: 250px;
-  transition: margin 0.3s;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+  background-color: #f8f9fa;
 }
 
 .main-content-extended {
@@ -161,28 +185,33 @@ body.login-page {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .sidebar {
-      width: 70px;
+    transform: translateX(-250px);
+    width: 250px;
+  }
+  
+  .sidebar.sidebar-collapsed {
+    transform: translateX(0);
   }
   
   .main-content {
-      margin-left: 70px;
+    margin-left: 0;
   }
   
-  .sidebar-toggle .fa-times, 
-  .sidebar-collapsed .sidebar-toggle .fa-bars {
-      display: none;
+  .main-content-extended {
+    margin-left: 0;
   }
   
-  .sidebar-collapsed .sidebar-toggle .fa-times {
-      display: inline-block;
+  .sidebar-collapsed .sidebar-menu-text,
+  .sidebar-collapsed .sidebar-brand span {
+    opacity: 1;
   }
   
   .sidebar-menu-text {
-      display: none;
+    display: inline-block;
   }
   
   .sidebar-brand span {
-      display: none;
+    display: inline-block;
   }
 }
 

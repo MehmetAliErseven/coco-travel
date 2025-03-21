@@ -17,14 +17,10 @@
 <body class="admin-layout">
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
+        <div class="sidebar-header" id="sidebarHeader">
             <div class="sidebar-brand">
                 <i class="fas fa-plane-departure me-2"></i>
                 <span>Coco Travel</span>
-            </div>
-            <div class="sidebar-toggle" id="sidebarToggle">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-times" style="display: none;"></i>
             </div>
         </div>
         
@@ -83,14 +79,13 @@
             
             <div class="dropdown">
                 <div class="d-flex align-items-center" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="me-2 d-none d-sm-inline"><?= $_SESSION['user']['username'] ?? 'Admin User' ?></span>
                     <div class="avatar">
                         <i class="fas fa-user"></i>
                     </div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li><h6 class="dropdown-header">Admin User</h6></li>
-                    <li><a class="dropdown-item" href="<?= \App\Helpers\url('admin/profile') ?>"><i class="fas fa-user-cog me-2"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog me-2"></i> Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="<?= \App\Helpers\url('admin/logout') ?>"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
                 </ul>
@@ -120,20 +115,66 @@
     
     <!-- Custom JS -->
     <script>
-        // Sidebar toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('mainContent');
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const toggleIcons = sidebarToggle.querySelectorAll('i');
+            const sidebarHeader = document.getElementById('sidebarHeader');
+            const isMobile = window.innerWidth <= 768;
             
-            sidebarToggle.addEventListener('click', function() {
+            // Toggle sidebar function
+            function toggleSidebar() {
                 sidebar.classList.toggle('sidebar-collapsed');
                 mainContent.classList.toggle('main-content-extended');
-                toggleIcons.forEach(icon => {
-                    icon.style.display = icon.style.display === 'none' ? 'inline-block' : 'none';
-                });
+                
+                // Store sidebar state in localStorage (only for desktop)
+                if (!isMobile) {
+                    localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('sidebar-collapsed'));
+                }
+            }
+            
+            // Initialize sidebar state from localStorage (only for desktop)
+            if (!isMobile) {
+                const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+                if (sidebarCollapsed) {
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.add('main-content-extended');
+                }
+            }
+            
+            // Add click event listener to header
+            sidebarHeader.addEventListener('click', toggleSidebar);
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                const newIsMobile = window.innerWidth <= 768;
+                
+                if (newIsMobile !== isMobile) {
+                    // Remove all classes and reset to default state for the new view
+                    sidebar.classList.remove('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-extended');
+                    
+                    if (newIsMobile) {
+                        localStorage.removeItem('sidebarCollapsed');
+                    } else {
+                        // Restore desktop state from localStorage
+                        const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+                        if (sidebarCollapsed) {
+                            sidebar.classList.add('sidebar-collapsed');
+                            mainContent.classList.add('main-content-extended');
+                        }
+                    }
+                }
             });
+            
+            // Close sidebar when clicking outside on mobile
+            if (isMobile) {
+                document.addEventListener('click', function(event) {
+                    const isClickInside = sidebar.contains(event.target);
+                    if (!isClickInside && sidebar.classList.contains('sidebar-collapsed')) {
+                        toggleSidebar();
+                    }
+                });
+            }
         });
     </script>
     

@@ -80,8 +80,95 @@ class TourController extends BaseAdminController
         ]);
     }
 
-    // ... Add edit, update, and delete actions
-    
+    public function editAction($id)
+    {
+        $tour = $this->tourModel->findById($id);
+        
+        if (!$tour) {
+            $this->setErrorMessage('Tour not found.');
+            $this->redirect(\App\Helpers\url('admin/tours'));
+            return;
+        }
+
+        $this->render('admin/tours/edit', [
+            'pageTitle' => 'Edit Tour',
+            'tour' => $tour,
+            'categories' => $this->categoryModel->getActiveCategories(),
+            'errors' => []
+        ]);
+    }
+
+    public function updateAction($id)
+    {
+        $tour = $this->tourModel->findById($id);
+        
+        if (!$tour) {
+            $this->setErrorMessage('Tour not found.');
+            $this->redirect(\App\Helpers\url('admin/tours'));
+            return;
+        }
+
+        $updatedData = $this->getTourDataFromRequest();
+        $errors = $this->tourModel->validate($updatedData);
+
+        if (empty($errors)) {
+            try {
+                // Handle image upload if new image is provided
+                if (isset($_FILES['tour_image']) && $_FILES['tour_image']['error'] === UPLOAD_ERR_OK) {
+                    $imageResult = $this->handleImageUpload($_FILES['tour_image']);
+                    if ($imageResult !== false) {
+                        $updatedData['image_url'] = $imageResult;
+                    }
+                }
+
+                // Handle image removal if requested
+                if (isset($_POST['remove_image']) && $_POST['remove_image'] == 1) {
+                    $updatedData['image_url'] = null;
+                }
+
+                $this->tourModel->update($id, $updatedData);
+                $this->setSuccessMessage('Tour updated successfully.');
+                $this->redirect(\App\Helpers\url('admin/tours'));
+                return;
+            } catch (\Exception $e) {
+                $errors['general'] = 'An error occurred while updating the tour.';
+            }
+        }
+
+        $this->render('admin/tours/edit', [
+            'pageTitle' => 'Edit Tour',
+            'tour' => array_merge($tour, $updatedData),
+            'categories' => $this->categoryModel->getActiveCategories(),
+            'errors' => $errors
+        ]);
+    }
+
+    public function deleteAction($id)
+    {
+        try {
+            $tour = $this->tourModel->findById($id);
+            
+            if (!$tour) {
+                $this->setErrorMessage('Tour not found.');
+            } else {
+                // Delete image file if exists
+                if (!empty($tour['image_url'])) {
+                    $imagePath = BASE_PATH . '/public/assets/uploads/' . $tour['image_url'];
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+                
+                $this->tourModel->delete($id);
+                $this->setSuccessMessage('Tour deleted successfully.');
+            }
+        } catch (\Exception $e) {
+            $this->setErrorMessage('An error occurred while deleting the tour.');
+        }
+        
+        $this->redirect(\App\Helpers\url('admin/tours'));
+    }
+
     private function getTourDataFromRequest()
     {
         return [
