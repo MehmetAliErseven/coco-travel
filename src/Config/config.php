@@ -25,7 +25,7 @@ class Config {
     }
     
     public static function getJwtExpiration() {
-        return (int)($_ENV['JWT_EXPIRE'] ?? 3600); // 1 hour
+        return (int)($_ENV['JWT_EXPIRE'] ?? 21600); // 6 hour
     }
     
     // Application Configuration
