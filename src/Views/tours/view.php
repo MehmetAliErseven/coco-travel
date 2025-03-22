@@ -14,21 +14,35 @@ $extraJs = '<script type="module">
     <div class="container">
         <h1><?= htmlspecialchars($tour['title']) ?></h1>
         <div class="d-flex flex-wrap align-items-center gap-3 mt-2">
+            <span class="badge bg-black me-2"><?= htmlspecialchars($tour['category_name']) ?></span>
+
+            <?php if (!empty($tour['start_date'])): ?>
+            <div class="d-flex align-items-center me-2">
+                <i class="far fa-calendar-alt me-2"></i>
+                <span><?= date('M d, Y', strtotime($tour['start_date'])) ?></span>
+            </div>
+            <?php endif; ?>
+
             <?php if (!empty($tour['duration'])): ?>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center me-2">
                 <i class="far fa-clock me-2"></i>
                 <span><?= htmlspecialchars($tour['duration']) ?></span>
             </div>
             <?php endif; ?>
-            
-            <span class="badge bg-primary"><?= htmlspecialchars($tour['category_name']) ?></span>
+
+            <?php if (!empty($tour['location'])): ?>
+            <div class="d-flex align-items-center me-2">
+                <i class="fas fa-map-marker-alt me-2"></i>
+                <span><?= htmlspecialchars($tour['location']) ?></span>
+            </div>
+            <?php endif; ?>
             
             <?php if ($tour['price']): ?>
-            <div class="fs-5 text-success fw-bold">
+            <div class="fs-5 text-primary fw-bold">
                 <?= \App\Helpers\formatPrice($tour['price']) ?> <span class="text-black fw-light"> (<?= $translator->trans('per person') ?>)</span>
             </div>
             <?php else: ?>
-            <div class="fs-5 text-success fw-bold">
+            <div class="fs-5 text-primary fw-bold">
                 <?= $translator->trans('Price on request') ?>
             </div>
             <?php endif; ?>

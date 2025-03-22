@@ -54,14 +54,26 @@
                     <?php endif; ?>
                     
                     <div class="card-body">
-                        <span class="category-badge mb-2"><?= htmlspecialchars($tour['category_name']) ?></span>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="category-badge me-1"><?= htmlspecialchars($tour['category_name']) ?></span>
+                            <?php if (!empty($tour['location'])): ?>
+                            <span class="badge bg-info text-dark"><i class="fas fa-map-marker-alt me-1"></i><?= htmlspecialchars($tour['location']) ?></span>
+                            <?php endif; ?>
+                        </div>
                         <h5 class="card-title"><?= htmlspecialchars($tour['title']) ?></h5>
                         
-                        <?php if ($tour['duration']): ?>
                         <p class="tour-duration mb-2">
-                            <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?>
+                            <?php if (!empty($tour['start_date'])): ?>
+                            <i class="far fa-calendar-alt me-1"></i><?= date('M d, Y', strtotime($tour['start_date'])) ?>
+                            <?php if (!empty($tour['duration'])): ?>
+                            <i class="fas fa-circle mx-1" style="font-size: 5px; vertical-align: middle;"></i>
+                            <?php endif; ?>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($tour['duration'])): ?>
+                            <i class="far fa-clock me-1"></i><?= htmlspecialchars($tour['duration']) ?>
+                            <?php endif; ?>
                         </p>
-                        <?php endif; ?>
                         
                         <p class="card-text"><?= \App\Helpers\truncate(htmlspecialchars($tour['description']), 100) ?></p>
                         <a href="<?= \App\Helpers\url('tours/view/' . $tour['slug']) ?>" class="btn btn-outline-primary"><?= $translator->trans('View Details') ?></a>
@@ -101,14 +113,26 @@
                     <?php endif; ?>
                     
                     <div class="card-body">
-                        <span class="category-badge mb-2"><?= htmlspecialchars($tour['category_name']) ?></span>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="category-badge me-1"><?= htmlspecialchars($tour['category_name']) ?></span>
+                            <?php if (!empty($tour['location'])): ?>
+                            <span class="badge bg-info text-dark"><i class="fas fa-map-marker-alt me-1"></i><?= htmlspecialchars($tour['location']) ?></span>
+                            <?php endif; ?>
+                        </div>
                         <h5 class="card-title"><?= htmlspecialchars($tour['title']) ?></h5>
                         
-                        <?php if ($tour['duration']): ?>
                         <p class="tour-duration mb-2">
-                            <i class="far fa-clock me-1"></i> <?= htmlspecialchars($tour['duration']) ?>
+                            <?php if (!empty($tour['start_date'])): ?>
+                            <i class="far fa-calendar-alt me-1"></i><?= date('M d, Y', strtotime($tour['start_date'])) ?>
+                            <?php if (!empty($tour['duration'])): ?>
+                            <i class="fas fa-circle mx-1" style="font-size: 5px; vertical-align: middle;"></i>
+                            <?php endif; ?>
+                            <?php endif; ?>
+                            
+                            <?php if (!empty($tour['duration'])): ?>
+                            <i class="far fa-clock me-1"></i><?= htmlspecialchars($tour['duration']) ?>
+                            <?php endif; ?>
                         </p>
-                        <?php endif; ?>
                         
                         <p class="card-text"><?= \App\Helpers\truncate(htmlspecialchars($tour['description']), 80) ?></p>
                         <a href="<?= \App\Helpers\url('tours/view/' . $tour['slug']) ?>" class="btn btn-sm btn-outline-primary"><?= $translator->trans('View Details') ?></a>

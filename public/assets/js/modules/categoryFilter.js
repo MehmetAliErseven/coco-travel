@@ -71,13 +71,20 @@ export default class CategoryFilter {
                     </div>` : ''}
                     
                     <div class="card-body">
-                        <span class="category-badge mb-2">${tour.category_name || window.translationService.translate('Uncategorized')}</span>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="category-badge me-1">${tour.category_name || window.translationService.translate('Uncategorized')}</span>
+                            ${tour.location ? 
+                            `<span class="badge bg-info text-dark"><i class="fas fa-map-marker-alt me-1"></i>${tour.location}</span>` : ''}
+                        </div>
                         <h5 class="card-title">${tour.title}</h5>
                         
-                        ${tour.duration ? 
-                        `<p class="tour-duration mb-2">
-                            <i class="far fa-clock me-1"></i> ${tour.duration}
-                        </p>` : ''}
+                        <p class="tour-duration mb-2">
+                            ${tour.start_date ? 
+                            `<i class="far fa-calendar-alt me-1"></i>${new Date(tour.start_date).toLocaleDateString()}` : ''}
+                            ${tour.start_date && tour.duration ? ' <i class="fas fa-circle mx-1" style="font-size: 5px; vertical-align: middle;"></i> ' : ''}
+                            ${tour.duration ? 
+                            `<i class="far fa-clock me-1"></i>${tour.duration}` : ''}
+                        </p>
                         
                         <p class="card-text">${tour.description ? tour.description.substring(0, 80) + '...' : ''}</p>
                     </div>

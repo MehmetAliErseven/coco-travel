@@ -183,6 +183,8 @@ class TourController extends BaseAdminController
             'includes' => $_POST['includes'] ?? '',
             'price' => $_POST['price'] ?? null,
             'duration' => $_POST['duration'] ?? '',
+            'start_date' => !empty($_POST['start_date']) ? $_POST['start_date'] : null,
+            'location' => $_POST['location'] ?? '',
             'category_id' => $_POST['category_id'] ?? null,
             'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
             'is_active' => isset($_POST['is_active']) ? 1 : 0

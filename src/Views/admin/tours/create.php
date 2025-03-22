@@ -65,6 +65,23 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="start_date" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="start_date" name="start_date">
+                                    <div class="form-text">First date of the tour</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="e.g., Phuket, Thailand">
+                                    <div class="form-text">Main location or destination of the tour</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Itinerary and Includes -->

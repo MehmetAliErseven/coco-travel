@@ -198,6 +198,14 @@ class TourModel extends BaseModel
             $errors['category_id'] = 'Category is required';
         }
         
+        if (!empty($data['start_date'])) {
+            // Validate date format
+            $dateObj = \DateTime::createFromFormat('Y-m-d', $data['start_date']);
+            if (!$dateObj || $dateObj->format('Y-m-d') !== $data['start_date']) {
+                $errors['start_date'] = 'Invalid date format';
+            }
+        }
+        
         return $errors;
     }
 }
