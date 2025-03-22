@@ -20,7 +20,7 @@ class TourModel extends BaseModel
         return $this->db->fetchAll($sql, []);
     }
 
-    public function searchTours($query, $categoryId = null, $page = null, $perPage = null)
+    public function searchTours($query, $categoryId = null, $page = null, $perPage = null, $startDate = null)
     {
         $params = [];
         
@@ -31,15 +31,22 @@ class TourModel extends BaseModel
         
         // Add search condition if query exists
         if ($query) {
-            $sql .= " AND (t.title LIKE :query_title OR t.description LIKE :query_desc)";
-            $params['query_title'] = "%{$query}%";
+            $sql .= " AND (t.title LIKE :query OR t.description LIKE :query_desc OR t.location LIKE :query_loc)";
+            $params['query'] = "%{$query}%";
             $params['query_desc'] = "%{$query}%";
+            $params['query_loc'] = "%{$query}%";
         }
 
         // Add category filter if specified
         if ($categoryId) {
             $sql .= " AND t.category_id = :category_id";
             $params['category_id'] = $categoryId;
+        }
+        
+        // Add date filter if specified
+        if ($startDate) {
+            $sql .= " AND t.start_date = :start_date";
+            $params['start_date'] = $startDate;
         }
 
         // Add ordering
@@ -56,7 +63,7 @@ class TourModel extends BaseModel
         return $this->db->fetchAll($sql, $params);
     }
 
-    public function getTotalSearchResults($query, $categoryId = null)
+    public function getTotalSearchResults($query, $categoryId = null, $startDate = null)
     {
         $params = [];
         
@@ -65,14 +72,20 @@ class TourModel extends BaseModel
                 WHERE t.is_active = 1";
         
         if ($query) {
-            $sql .= " AND (t.title LIKE :query_title OR t.description LIKE :query_desc)";
-            $params['query_title'] = "%{$query}%";
+            $sql .= " AND (t.title LIKE :query OR t.description LIKE :query_desc OR t.location LIKE :query_loc)";
+            $params['query'] = "%{$query}%";
             $params['query_desc'] = "%{$query}%";
+            $params['query_loc'] = "%{$query}%";
         }
 
         if ($categoryId) {
             $sql .= " AND t.category_id = :category_id";
             $params['category_id'] = $categoryId;
+        }
+        
+        if ($startDate) {
+            $sql .= " AND t.start_date = :start_date";
+            $params['start_date'] = $startDate;
         }
 
         return $this->db->fetch($sql, $params)['count'];

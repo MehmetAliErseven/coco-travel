@@ -4,6 +4,7 @@ export default class TourSearch {
         if (!this.searchForm) return;
         
         this.searchInput = this.searchForm.querySelector('#searchInput');
+        this.dateInput = this.searchForm.querySelector('#search-date');
         this.categorySelect = this.searchForm.querySelector('#category-filter');
         this.categoryButtons = document.querySelectorAll('.category-filter');
         this.resultsContainer = document.querySelector('#toursContainer') || document.querySelector('#live-search-results');
@@ -11,6 +12,7 @@ export default class TourSearch {
         this.BASE_URL = window.basePath || '';
         this.originalContent = this.resultsContainer ? this.resultsContainer.innerHTML : '';
         this.selectedCategoryId = this.categorySelect ? this.categorySelect.value : 'all';
+        this.selectedDate = this.dateInput ? this.dateInput.value : '';
         
         // Determine if we're on the home page
         this.isHomePage = window.location.pathname === '/' || window.location.pathname === this.BASE_URL;
@@ -25,6 +27,10 @@ export default class TourSearch {
         
         if (this.searchInput) {
             this.searchInput.addEventListener('input', debounce((e) => this.handleSearch(e), 500));
+        }
+
+        if (this.dateInput) {
+            this.dateInput.addEventListener('change', (e) => this.handleSearch(e));
         }
 
         if (this.searchForm) {
@@ -63,9 +69,10 @@ export default class TourSearch {
     async handleSearch(e) {
         e.preventDefault();
         const query = this.searchInput ? this.searchInput.value.trim() : '';
+        this.selectedDate = this.dateInput ? this.dateInput.value : '';
 
         // Handle empty search on homepage
-        if (this.isHomePage && !query) {
+        if (this.isHomePage && !query && !this.selectedDate) {
             if (this.resultsContainer) {
                 this.resultsContainer.style.display = 'none';
             }
@@ -82,6 +89,10 @@ export default class TourSearch {
             
             if (this.selectedCategoryId !== 'all' && this.selectedCategoryId !== '0') {
                 params.append('category_id', this.selectedCategoryId);
+            }
+            
+            if (this.selectedDate) {
+                params.append('start_date', this.selectedDate);
             }
 
             const paramString = params.toString();

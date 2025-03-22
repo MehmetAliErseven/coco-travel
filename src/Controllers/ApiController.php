@@ -23,21 +23,30 @@ class ApiController extends BaseController
 
     public function searchToursAction()
     {
-        $query = $_GET['q'] ?? '';
-        $categoryId = $_GET['category_id'] ?? null;
-        
-        // Get total count of all active tours
-        $totalCount = $this->tourModel->getTotalTours();
-        
-        // Get filtered tours
-        $tours = $this->tourModel->searchTours($query, $categoryId);
-        
-        $this->jsonResponse([
+        // Get search parameters
+        $query = isset($_GET['q']) ? trim($_GET['q']) : null;
+        $categoryId = isset($_GET['category_id']) ? (int)$_GET['category_id'] : null;
+        $startDate = isset($_GET['start_date']) ? trim($_GET['start_date']) : null;
+
+        // Get current page and items per page
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $perPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 12;
+
+        // Use TourModel to search tours
+        $searchResults = $this->tourModel->searchTours($query, $categoryId, $page, $perPage, $startDate);
+        $totalResults = $this->tourModel->getTotalSearchResults($query, $categoryId, $startDate);
+
+        // Format results
+        $response = [
             'success' => true,
-            'tours' => $tours,
-            'totalCount' => $totalCount,
-            'filteredCount' => count($tours)
-        ]);
+            'tours' => $searchResults,
+            'totalCount' => $totalResults,
+            'filteredCount' => count($searchResults),
+            'page' => $page,
+            'totalPages' => ceil($totalResults / $perPage)
+        ];
+
+        $this->jsonResponse($response);
     }
 
     public function getToursByCategoryAction($id)

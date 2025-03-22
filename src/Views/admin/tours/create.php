@@ -17,6 +17,13 @@
     <?php unset($_SESSION['admin_message']); ?>
 <?php endif; ?>
 
+<?php if (isset($errors['general'])): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= $errors['general'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
 <div class="card border-0 shadow-sm">
     <div class="card-body">
         <form id="tourForm" action="<?= \App\Helpers\url('admin/tours/store') ?>" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
@@ -31,18 +38,42 @@
                         
                         <div class="mb-3">
                             <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="title" name="title" required>
+                            <input type="text" 
+                                   class="form-control <?= isset($errors['title']) ? 'is-invalid' : '' ?>" 
+                                   id="title" 
+                                   name="title" 
+                                   value="<?= htmlspecialchars($tour['title'] ?? '') ?>"
+                                   required>
+                            <?php if (isset($errors['title'])): ?>
+                                <div class="invalid-feedback"><?= $errors['title'] ?></div>
+                            <?php endif; ?>
                         </div>
                         
                         <div class="mb-3">
                             <label for="slug" class="form-label">Slug <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="slug" name="slug" required>
-                            <div class="form-text">URL-friendly version of the title (e.g., "beach-vacation")</div>
+                            <input type="text" 
+                                   class="form-control <?= isset($errors['slug']) ? 'is-invalid' : '' ?>" 
+                                   id="slug" 
+                                   name="slug" 
+                                   value="<?= htmlspecialchars($tour['slug'] ?? '') ?>"
+                                   required>
+                            <?php if (isset($errors['slug'])): ?>
+                                <div class="invalid-feedback"><?= $errors['slug'] ?></div>
+                            <?php else: ?>
+                                <div class="form-text">URL-friendly version of the title (e.g., "beach-vacation")</div>
+                            <?php endif; ?>
                         </div>
                         
                         <div class="mb-3">
                             <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="description" name="description" rows="6" required></textarea>
+                            <textarea class="form-control <?= isset($errors['description']) ? 'is-invalid' : '' ?>" 
+                                      id="description" 
+                                      name="description" 
+                                      rows="6" 
+                                      required><?= htmlspecialchars($tour['description'] ?? '') ?></textarea>
+                            <?php if (isset($errors['description'])): ?>
+                                <div class="invalid-feedback"><?= $errors['description'] ?></div>
+                            <?php endif; ?>
                         </div>
                     </div>
                     
@@ -54,14 +85,33 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="price" class="form-label">Price ($)</label>
-                                    <input type="number" class="form-control" id="price" name="price" step="0.01" min="0">
+                                    <label for="price" class="form-label">Price ($) <span class="text-danger">*</span></label>
+                                    <input type="number" 
+                                           class="form-control <?= isset($errors['price']) ? 'is-invalid' : '' ?>" 
+                                           id="price" 
+                                           name="price" 
+                                           step="0.01" 
+                                           min="0"
+                                           value="<?= htmlspecialchars($tour['price'] ?? '') ?>"
+                                           required>
+                                    <?php if (isset($errors['price'])): ?>
+                                        <div class="invalid-feedback"><?= $errors['price'] ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="duration" class="form-label">Duration</label>
-                                    <input type="text" class="form-control" id="duration" name="duration" placeholder="e.g., 3 days / 2 nights">
+                                    <label for="duration" class="form-label">Duration <span class="text-danger">*</span></label>
+                                    <input type="text" 
+                                           class="form-control <?= isset($errors['duration']) ? 'is-invalid' : '' ?>" 
+                                           id="duration" 
+                                           name="duration" 
+                                           value="<?= htmlspecialchars($tour['duration'] ?? '') ?>"
+                                           placeholder="e.g., 3 days / 2 nights" 
+                                           required>
+                                    <?php if (isset($errors['duration'])): ?>
+                                        <div class="invalid-feedback"><?= $errors['duration'] ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -70,15 +120,32 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="start_date" class="form-label">Start Date</label>
-                                    <input type="date" class="form-control" id="start_date" name="start_date">
-                                    <div class="form-text">First date of the tour</div>
+                                    <input type="date" 
+                                           class="form-control <?= isset($errors['start_date']) ? 'is-invalid' : '' ?>" 
+                                           id="start_date" 
+                                           name="start_date" 
+                                           value="<?= htmlspecialchars($tour['start_date'] ?? '') ?>">
+                                    <?php if (isset($errors['start_date'])): ?>
+                                        <div class="invalid-feedback"><?= $errors['start_date'] ?></div>
+                                    <?php else: ?>
+                                        <div class="form-text">First date of the tour</div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="location" class="form-label">Location</label>
-                                    <input type="text" class="form-control" id="location" name="location" placeholder="e.g., Phuket, Thailand">
-                                    <div class="form-text">Main location or destination of the tour</div>
+                                    <input type="text" 
+                                           class="form-control <?= isset($errors['location']) ? 'is-invalid' : '' ?>" 
+                                           id="location" 
+                                           name="location" 
+                                           value="<?= htmlspecialchars($tour['location'] ?? '') ?>"
+                                           placeholder="e.g., Phuket, Thailand">
+                                    <?php if (isset($errors['location'])): ?>
+                                        <div class="invalid-feedback"><?= $errors['location'] ?></div>
+                                    <?php else: ?>
+                                        <div class="form-text">Main location or destination of the tour</div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -91,14 +158,28 @@
                         
                         <div class="mb-3">
                             <label for="itinerary" class="form-label">Itinerary</label>
-                            <textarea class="form-control" id="itinerary" name="itinerary" rows="6"></textarea>
-                            <div class="form-text">Day-by-day breakdown of the tour activities</div>
+                            <textarea class="form-control <?= isset($errors['itinerary']) ? 'is-invalid' : '' ?>" 
+                                      id="itinerary" 
+                                      name="itinerary" 
+                                      rows="6"><?= htmlspecialchars($tour['itinerary'] ?? '') ?></textarea>
+                            <?php if (isset($errors['itinerary'])): ?>
+                                <div class="invalid-feedback"><?= $errors['itinerary'] ?></div>
+                            <?php else: ?>
+                                <div class="form-text">Day-by-day breakdown of the tour activities</div>
+                            <?php endif; ?>
                         </div>
                         
                         <div class="mb-3">
                             <label for="includes" class="form-label">What's Included</label>
-                            <textarea class="form-control" id="includes" name="includes" rows="4"></textarea>
-                            <div class="form-text">List of amenities, services, or items included in the package</div>
+                            <textarea class="form-control <?= isset($errors['includes']) ? 'is-invalid' : '' ?>" 
+                                      id="includes" 
+                                      name="includes" 
+                                      rows="4"><?= htmlspecialchars($tour['includes'] ?? '') ?></textarea>
+                            <?php if (isset($errors['includes'])): ?>
+                                <div class="invalid-feedback"><?= $errors['includes'] ?></div>
+                            <?php else: ?>
+                                <div class="form-text">List of amenities, services, or items included in the package</div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -111,13 +192,21 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="category_id" class="form-label">Category</label>
-                                <select class="form-select" id="category_id" name="category_id">
-                                    <option value="">-- Select Category --</option>
-                                    <?php foreach ($categories as $category): ?>
-                                        <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
+                                <select class="form-select <?= isset($errors['category_id']) ? 'is-invalid' : '' ?>" 
+                                    id="category_id" 
+                                    name="category_id" 
+                                    required>
+                                <option value="">-- Select Category --</option>
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?= $category['id'] ?>" <?= ($tour['category_id'] ?? '') == $category['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($category['name']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php if (isset($errors['category_id'])): ?>
+                                <div class="invalid-feedback"><?= $errors['category_id'] ?></div>
+                            <?php endif; ?>
                             </div>
                             
                             <div class="mb-3">

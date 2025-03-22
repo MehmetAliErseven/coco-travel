@@ -4,28 +4,34 @@
         <h1 class="hero-title"><?= $translator->trans('Journey Beyond Dreams') ?></h1>
         <p class="hero-subtitle"><?= $translator->trans('Make your dream vacation come true with Coco Travel') ?></p>
         
-        <div class="search-box">
+        <div class="search-box rounded shadow-lg p-3">
             <form id="tourSearchForm" action="<?= \App\Helpers\url('home/search') ?>" method="GET">
                 <div class="row g-3">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="searchInput" name="query" value="">
-                            <label for="searchInput"><?= $translator->trans('Where do you want to go?') ?></label>
+                            <input type="text" class="form-control border-0 bg-white" id="searchInput" name="query" value="">
+                            <label for="searchInput"><i class="fas fa-search text-primary me-2"></i><?= $translator->trans('Where do you want to go?') ?></label>
                         </div>
-                        <div id="live-search-results" class="position-absolute bg-white shadow rounded w-100 mt-1 z-3" style="display: none; max-height: 300px; overflow-y: auto;"></div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <select class="form-select" id="category-filter" name="category_id">
+                            <input type="date" class="form-control border-0 bg-white" id="search-date" name="start_date" placeholder="<?= $translator->trans('When') ?>">
+                            <label for="search-date"><i class="far fa-calendar-alt text-primary me-2"></i><?= $translator->trans('When') ?></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select class="form-select border-0 bg-white" id="category-filter" name="category_id">
                                 <option value="0" selected><?= $translator->trans('All Categories') ?></option>
                                 <?php foreach ($categories as $category): ?>
                                 <option value="<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <label for="category-filter"><?= $translator->trans('Category') ?></label>
+                            <label for="category-filter"><i class="fas fa-tag text-primary me-2"></i><?= $translator->trans('Category') ?></label>
                         </div>
                     </div>
                 </div>
+                <div id="live-search-results" class="position-absolute bg-white shadow rounded w-100 mt-2 z-3" style="display: none; max-height: 300px; overflow-y: auto;"></div>
             </form>
         </div>
     </div>

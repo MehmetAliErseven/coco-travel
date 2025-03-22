@@ -43,6 +43,8 @@ class TourController extends BaseAdminController
                 'price' => '',
                 'duration' => '',
                 'category_id' => '',
+                'start_date' => '',
+                'location' => '',
                 'is_featured' => 0,
                 'is_active' => 1
             ]

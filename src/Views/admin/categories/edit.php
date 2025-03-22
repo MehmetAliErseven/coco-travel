@@ -10,9 +10,18 @@
         </a>
     </div>
     <div class="card-body">
+        <?php if (isset($_SESSION['admin_message'])): ?>
+            <div class="alert alert-<?= $_SESSION['admin_message']['type'] ?> alert-dismissible fade show" role="alert">
+                <?= $_SESSION['admin_message']['text'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['admin_message']); ?>
+        <?php endif; ?>
+
         <?php if (isset($errors['general'])): ?>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <?= $errors['general'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
         
@@ -20,9 +29,13 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Helpers\generateCsrfToken() ?>">
             
             <div class="mb-3">
-                <label for="name" class="form-label">Category Name *</label>
-                <input type="text" class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" 
-                       id="name" name="name" value="<?= htmlspecialchars($category['name']) ?>" required>
+                <label for="name" class="form-label">Category Name <span class="text-danger">*</span></label>
+                <input type="text" 
+                       class="form-control <?= isset($errors['name']) ? 'is-invalid' : '' ?>" 
+                       id="name" 
+                       name="name" 
+                       value="<?= htmlspecialchars($category['name'] ?? '') ?>" 
+                       required>
                 <?php if (isset($errors['name'])): ?>
                     <div class="invalid-feedback">
                         <?= $errors['name'] ?>
@@ -36,17 +49,29 @@
             
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" 
-                          rows="4"><?= htmlspecialchars($category['description']) ?></textarea>
-                <div class="form-text">
-                    A brief description of what this category represents (optional).
-                </div>
+                <textarea class="form-control <?= isset($errors['description']) ? 'is-invalid' : '' ?>" 
+                          id="description" 
+                          name="description" 
+                          rows="4"><?= htmlspecialchars($category['description'] ?? '') ?></textarea>
+                <?php if (isset($errors['description'])): ?>
+                    <div class="invalid-feedback">
+                        <?= $errors['description'] ?>
+                    </div>
+                <?php else: ?>
+                    <div class="form-text">
+                        A brief description of what this category represents (optional).
+                    </div>
+                <?php endif; ?>
             </div>
             
             <div class="mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
-                           <?= $category['is_active'] ? 'checked' : '' ?>>
+                    <input class="form-check-input" 
+                           type="checkbox" 
+                           id="is_active" 
+                           name="is_active" 
+                           value="1"
+                           <?= ($category['is_active'] ?? true) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="is_active">
                         Active
                     </label>
