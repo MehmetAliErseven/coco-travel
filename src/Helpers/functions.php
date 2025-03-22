@@ -110,7 +110,7 @@ function validateCsrfToken($token)
  * @param string $currency The currency symbol
  * @return string Formatted price
  */
-function formatPrice($price, $currency = '$')
+function formatPrice($price, $currency = '฿')
 {
     return $currency . number_format($price, 2);
 }

@@ -115,15 +115,19 @@ class TourController extends BaseAdminController
             try {
                 // Handle image upload if new image is provided
                 if (isset($_FILES['tour_image']) && $_FILES['tour_image']['error'] === UPLOAD_ERR_OK) {
+                    // Önce eski resmi sil (eğer varsa)
+                    if (!empty($tour['image_url'])) {
+                        $oldImagePath = BASE_PATH . '/public/assets/uploads/' . $tour['image_url'];
+                        if (file_exists($oldImagePath)) {
+                            unlink($oldImagePath);
+                        }
+                    }
+                    
+                    // Yeni resmi yükle
                     $imageResult = $this->handleImageUpload($_FILES['tour_image']);
                     if ($imageResult !== false) {
                         $updatedData['image_url'] = $imageResult;
                     }
-                }
-
-                // Handle image removal if requested
-                if (isset($_POST['remove_image']) && $_POST['remove_image'] == 1) {
-                    $updatedData['image_url'] = null;
                 }
 
                 $this->tourModel->update($id, $updatedData);

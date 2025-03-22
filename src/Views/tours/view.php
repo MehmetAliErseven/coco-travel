@@ -25,7 +25,7 @@ $extraJs = '<script type="module">
             
             <?php if ($tour['price']): ?>
             <div class="fs-5 text-success fw-bold">
-                <?= \App\Helpers\formatPrice($tour['price']) ?> <?= $translator->trans('per person') ?>
+                <?= \App\Helpers\formatPrice($tour['price']) ?> <span class="text-black fw-light"> (<?= $translator->trans('per person') ?>)</span>
             </div>
             <?php else: ?>
             <div class="fs-5 text-success fw-bold">

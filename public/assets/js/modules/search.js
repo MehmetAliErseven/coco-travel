@@ -120,7 +120,7 @@ export default class TourSearch {
                         <span class="tour-category">${tour.category_name || window.translationService.translate('Uncategorized')}</span>
                     </div>
                     <div class="tour-price">
-                        ${tour.price ? `$${parseFloat(tour.price).toFixed(2)}` : ''}
+                        ${tour.price ? `฿${parseFloat(tour.price).toFixed(2)}` : ''}
                     </div>
                     <a href="${this.BASE_URL}/tours/view/${tour.slug}" class="btn btn-sm btn-outline-primary ms-2">
                         ${window.translationService.translate('View Details')}
@@ -148,7 +148,7 @@ export default class TourSearch {
                         
                         ${tour.price ? 
                         `<div class="tour-price">
-                            $${parseFloat(tour.price).toFixed(2)}
+                            ฿${parseFloat(tour.price).toFixed(2)}
                         </div>` : ''}
                         
                         <div class="card-body">

@@ -154,15 +154,6 @@
                             <?php if (isset($errors['image'])): ?>
                                 <div class="invalid-feedback d-block"><?= $errors['image'] ?></div>
                             <?php endif; ?>
-
-                            <?php if (!empty($tour['image_url'])): ?>
-                                <div class="form-check mt-3">
-                                    <input class="form-check-input" type="checkbox" id="remove_image" name="remove_image" value="1">
-                                    <label class="form-check-label text-danger" for="remove_image">
-                                        Remove current image
-                                    </label>
-                                </div>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

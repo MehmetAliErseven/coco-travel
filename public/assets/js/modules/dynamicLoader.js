@@ -67,7 +67,7 @@ export default class DynamicLoader {
                         <h5 class="card-title">${tour.title}</h5>
                         <p class="card-text">${tour.description.substring(0, 100)}...</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="price">$${tour.price}</span>
+                            <span class="price">฿${parseFloat(tour.price).toFixed(2)}</span>
                             <a href="/tour/${tour.slug}" class="btn btn-primary">${window.translationService.translate('View Details')}</a>
                         </div>
                     </div>

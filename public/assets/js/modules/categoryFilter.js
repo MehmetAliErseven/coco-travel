@@ -67,7 +67,7 @@ export default class CategoryFilter {
                     
                     ${tour.price ? 
                     `<div class="tour-price">
-                        $${parseFloat(tour.price).toFixed(2)}
+                        ฿${parseFloat(tour.price).toFixed(2)}
                     </div>` : ''}
                     
                     <div class="card-body">
