@@ -264,6 +264,7 @@
             </div>
             
             <div class="d-flex justify-content-end mt-4">
+                <button type="reset" class="btn btn-light me-2">Reset</button>
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save me-2"></i>Update Tour
                 </button>
