@@ -137,17 +137,24 @@
                                          class="img-fluid">
                                 </div>
                             <?php endif; ?>
-                            
-                            <div class="mb-3">
-                                <label for="tour_image" class="form-label">Upload New Image</label>
-                                <input class="form-control" type="file" id="tour_image" name="tour_image" accept="image/*">
-                                <div class="form-text">Leave empty to keep current image</div>
+
+                            <div id="dropZone" class="drop-zone">
+                                <div class="drop-zone-text">
+                                    <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                    <p>Drag & drop image here or click to select</p>
+                                    <small class="text-muted">Allowed formats: JPG, PNG, WebP (max 5MB)</small>
+                                    <input type="file" name="tour_image" id="tour_image" class="drop-zone-input" accept="image/jpeg,image/png,image/webp">
+                                </div>
                             </div>
                             
-                            <div class="image-preview text-center p-2 border rounded d-none" id="imagePreviewContainer">
+                            <div class="image-preview text-center p-2 border rounded mt-3 d-none" id="imagePreviewContainer">
                                 <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid">
                             </div>
                             
+                            <?php if (isset($errors['image'])): ?>
+                                <div class="invalid-feedback d-block"><?= $errors['image'] ?></div>
+                            <?php endif; ?>
+
                             <?php if (!empty($tour['image_url'])): ?>
                                 <div class="form-check mt-3">
                                     <input class="form-check-input" type="checkbox" id="remove_image" name="remove_image" value="1">

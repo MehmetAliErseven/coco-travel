@@ -127,32 +127,23 @@
                             <h5 class="mb-0">Featured Image</h5>
                         </div>
                         <div class="card-body">
-                            <div class="mb-3">
-                                <label for="tour_image" class="form-label">Upload Image</label>
-                                <input class="form-control" type="file" id="tour_image" name="tour_image" accept="image/*">
-                                <div class="form-text">Recommended size: 800x600 pixels</div>
+                            <div id="dropZone" class="drop-zone">
+                                <div class="drop-zone-text">
+                                    <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                    <p>Drag & drop image here or click to select</p>
+                                    <small class="text-muted">Allowed formats: JPG, PNG, WebP (max 5MB)</small>
+                                    <input type="file" name="tour_image" id="tour_image" class="drop-zone-input" accept="image/jpeg,image/png,image/webp">
+                                </div>
                             </div>
                             
-                            <div class="image-preview text-center p-2 border rounded d-none" id="imagePreviewContainer">
+                            <div class="image-preview text-center p-2 border rounded mt-3 d-none" id="imagePreviewContainer">
                                 <img id="imagePreview" src="#" alt="Image Preview" class="img-fluid">
                             </div>
+
+                            <?php if (isset($errors['image'])): ?>
+                                <div class="invalid-feedback d-block"><?= $errors['image'] ?></div>
+                            <?php endif; ?>
                         </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Tour Image</label>
-                        <div id="dropZone" class="drop-zone">
-                            <div class="drop-zone-text">
-                                <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
-                                <p>Drag & drop image here or click to select</p>
-                                <small class="text-muted">Allowed formats: JPG, PNG, WebP (max 5MB)</small>
-                                <input type="file" name="image" id="tourImage" class="drop-zone-input" accept="image/jpeg,image/png,image/webp">
-                            </div>
-                            <img id="imagePreview" class="img-preview" style="display: none;">
-                        </div>
-                        <?php if (isset($errors['image'])): ?>
-                            <div class="invalid-feedback d-block"><?= $errors['image'] ?></div>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>

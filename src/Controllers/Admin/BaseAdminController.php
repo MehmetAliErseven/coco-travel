@@ -56,7 +56,7 @@ abstract class BaseAdminController extends BaseController
         $targetPath = rtrim($uploadDir, '/') . '/' . $newFileName;
 
         if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-            return 'assets/uploads/' . $newFileName;
+            return 'tours/' . $newFileName;
         }
 
         return false;

@@ -23,7 +23,7 @@ class DashboardController extends BaseAdminController
     {
         $stats = [
             'totalTours' => $this->tourModel->getTotalTours(),
-            'activeTours' => $this->tourModel->getTotalTours(['is_active' => 1]),
+            'activeTours' => $this->tourModel->getTotalTours(),
             'totalCategories' => count($this->categoryModel->getActiveCategories()),
             'totalMessages' => $this->messageModel->getTotalCount()
         ];

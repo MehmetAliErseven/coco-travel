@@ -56,8 +56,8 @@ class TourController extends BaseAdminController
 
         if (empty($errors)) {
             try {
-                if (isset($_FILES['image'])) {
-                    $imageResult = $this->handleImageUpload($_FILES['image']);
+                if (isset($_FILES['tour_image']) && $_FILES['tour_image']['error'] === UPLOAD_ERR_OK) {
+                    $imageResult = $this->handleImageUpload($_FILES['tour_image']);
                     if ($imageResult !== false) {
                         $tour['image_url'] = $imageResult;
                     }
@@ -181,8 +181,7 @@ class TourController extends BaseAdminController
             'duration' => $_POST['duration'] ?? '',
             'category_id' => $_POST['category_id'] ?? null,
             'is_featured' => isset($_POST['is_featured']) ? 1 : 0,
-            'is_active' => isset($_POST['is_active']) ? 1 : 0,
-            'created_by' => $_SESSION['admin']['id']
+            'is_active' => isset($_POST['is_active']) ? 1 : 0
         ];
     }
 
