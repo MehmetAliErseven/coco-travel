@@ -21,6 +21,7 @@ return [
     'Find Your Perfect Tour' => 'Mükemmel Turunuzu Bulun',
     'Where do you want to go?' => 'Nereye gitmek istiyorsunuz?',
     'Search' => 'Ara',
+    'When' => 'Ne zaman',
     'Popular Destinations' => 'Popüler Destinasyonlar',
     'View All Tours' => 'Tüm Turları Görüntüle',
     'Explore Our Popular Tours' => 'Popüler Turlarımızı Keşfedin',

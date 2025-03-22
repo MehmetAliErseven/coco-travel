@@ -34,6 +34,12 @@
                 <div id="live-search-results" class="position-absolute bg-white shadow rounded w-100 mt-2 z-3" style="display: none; max-height: 300px; overflow-y: auto;"></div>
             </form>
         </div>
+
+        <div class="text-center mt-4">
+            <a href="<?= \App\Helpers\url('tours') ?>" class="fw-bold text-white text-decoration-none">
+                <i class="fas fa-arrow-right text-primary me-2"></i><?= $translator->trans('View All Tours') ?>
+            </a>
+        </div>
     </div>
 </section>
 

@@ -21,6 +21,7 @@ return [
     'Find Your Perfect Tour' => 'Find Your Perfect Tour',
     'Where do you want to go?' => 'Where do you want to go?',
     'Search' => 'Search',
+    'When' => 'When',
     'Popular Destinations' => 'Popular Destinations',
     'View All Tours' => 'View All Tours',
     'Explore Our Popular Tours' => 'Explore Our Popular Tours',

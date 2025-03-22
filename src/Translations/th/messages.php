@@ -21,6 +21,7 @@ return [
     'Find Your Perfect Tour' => 'ค้นหาทัวร์ที่สมบูรณ์แบบของคุณ',
     'Where do you want to go?' => 'คุณอยากไปที่ไหน?',
     'Search' => 'ค้นหา',
+    'When' => 'เมื่อไหร่',
     'Popular Destinations' => 'จุดหมายปลายทางยอดนิยม',
     'View All Tours' => 'ดูทัวร์ทั้งหมด',
     'Explore Our Popular Tours' => 'สำรวจทัวร์ยอดนิยมของเรา',

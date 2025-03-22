@@ -90,87 +90,78 @@
                 </div>
                 <?php endforeach; ?>
             </div>
-        <?php endif; ?>
 
-        <!-- Load More Button -->
-        <?php if ($hasMoreTours): ?>
-            <div class="text-center mt-4">
-                <button id="loadMoreTours" class="btn btn-primary">
-                    <?= $translator->trans('Load More') ?>
-                </button>
-            </div>
-        <?php endif; ?>
+            <!-- Pagination -->
+            <?php if ($totalPages > 1): ?>
+            <nav class="mt-5" aria-label="<?= $translator->trans('Tour navigation') ?>">
+                <ul class="pagination justify-content-center">
+                    <?php if ($currentPage > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . ($currentPage - 1)) ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <?php else: ?>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <?php endif; ?>
 
-        <!-- Pagination -->
-        <?php if ($totalPages > 1): ?>
-        <nav class="mt-5" aria-label="<?= $translator->trans('Tour navigation') ?>">
-            <ul class="pagination justify-content-center">
-                <?php if ($currentPage > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . ($currentPage - 1)) ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <?php else: ?>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <?php endif; ?>
+                    <?php 
+                    // Calculate range of pages to show
+                    $range = 2;
+                    $startPage = max(1, $currentPage - $range);
+                    $endPage = min($totalPages, $currentPage + $range);
+                    
+                    // Always show first page
+                    if ($startPage > 1): 
+                    ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= \App\Helpers\url('tours?page=1') ?>">1</a>
+                    </li>
+                    <?php 
+                        if ($startPage > 2): 
+                            echo '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+                        endif;
+                    endif; 
+                    
+                    // Show page links in range
+                    for ($i = $startPage; $i <= $endPage; $i++): 
+                    ?>
+                    <li class="page-item <?= $i == $currentPage ? 'active' : '' ?>">
+                        <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . $i) ?>"><?= $i ?></a>
+                    </li>
+                    <?php endfor; 
+                    
+                    // Always show last page
+                    if ($endPage < $totalPages): 
+                        if ($endPage < $totalPages - 1): 
+                            echo '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+                        endif;
+                    ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . $totalPages) ?>"><?= $totalPages ?></a>
+                    </li>
+                    <?php endif; ?>
 
-                <?php 
-                // Calculate range of pages to show
-                $range = 2;
-                $startPage = max(1, $currentPage - $range);
-                $endPage = min($totalPages, $currentPage + $range);
-                
-                // Always show first page
-                if ($startPage > 1): 
-                ?>
-                <li class="page-item">
-                    <a class="page-link" href="<?= \App\Helpers\url('tours?page=1') ?>">1</a>
-                </li>
-                <?php 
-                    if ($startPage > 2): 
-                        echo '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
-                    endif;
-                endif; 
-                
-                // Show page links in range
-                for ($i = $startPage; $i <= $endPage; $i++): 
-                ?>
-                <li class="page-item <?= $i == $currentPage ? 'active' : '' ?>">
-                    <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . $i) ?>"><?= $i ?></a>
-                </li>
-                <?php endfor; 
-                
-                // Always show last page
-                if ($endPage < $totalPages): 
-                    if ($endPage < $totalPages - 1): 
-                        echo '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
-                    endif;
-                ?>
-                <li class="page-item">
-                    <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . $totalPages) ?>"><?= $totalPages ?></a>
-                </li>
-                <?php endif; ?>
-
-                <?php if ($currentPage < $totalPages): ?>
-                <li class="page-item">
-                    <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . ($currentPage + 1)) ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <?php else: ?>
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+                    <?php if ($currentPage < $totalPages): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= \App\Helpers\url('tours?page=' . ($currentPage + 1)) ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <?php else: ?>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </section>

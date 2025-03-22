@@ -44,7 +44,12 @@ class ToursController extends BaseController
         }
         
         $totalPages = ceil($totalCount / $perPage);
-        $hasMoreTours = ($currentPage * $perPage < $totalCount);
+        
+        // Ensure current page doesn't exceed total pages
+        if ($currentPage > $totalPages) {
+            $this->redirect(\App\Helpers\url('tours?page=' . $totalPages));
+            return;
+        }
         
         // Render the view
         $this->render('tours/index', [
@@ -54,7 +59,6 @@ class ToursController extends BaseController
             'currentPage' => $currentPage,
             'totalPages' => $totalPages,
             'totalCount' => $totalCount,
-            'hasMoreTours' => $hasMoreTours,
             'currentQuery' => $query,
             'currentCategory' => $categoryId
         ]);

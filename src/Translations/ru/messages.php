@@ -21,6 +21,7 @@ return [
     'Find Your Perfect Tour' => 'Найдите свой идеальный тур',
     'Where do you want to go?' => 'Куда вы хотите отправиться?',
     'Search' => 'Поиск',
+    'When' => 'Когда',
     'Popular Destinations' => 'Популярные направления',
     'View All Tours' => 'Посмотреть все туры',
     'Explore Our Popular Tours' => 'Изучите наши популярные туры',
