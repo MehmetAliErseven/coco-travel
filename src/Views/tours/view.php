@@ -38,11 +38,11 @@ $extraJs = '<script type="module">
             <?php endif; ?>
             
             <?php if ($tour['price']): ?>
-            <div class="fs-5 text-primary fw-bold">
+            <div class="fs-5 text-info fw-bold">
                 <?= \App\Helpers\formatPrice($tour['price']) ?> <span class="text-black fw-light"> (<?= $translator->trans('per person') ?>)</span>
             </div>
             <?php else: ?>
-            <div class="fs-5 text-primary fw-bold">
+            <div class="fs-5 text-info fw-bold">
                 <?= $translator->trans('Price on request') ?>
             </div>
             <?php endif; ?>

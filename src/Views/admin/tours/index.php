@@ -33,6 +33,7 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Price</th>
+                            <th>Start Date</th>
                             <th>Status</th>
                             <th>Featured</th>
                             <th>Actions</th>
@@ -58,6 +59,13 @@
                                 </td>
                                 <td><?= htmlspecialchars($tour['category_name'] ?? 'Uncategorized') ?></td>
                                 <td><?= !empty($tour['price']) ? '$' . number_format($tour['price'], 2) : 'N/A' ?></td>
+                                <td>
+                                    <?php if (!empty($tour['start_date'])): ?>
+                                        <?= date('d M, Y', strtotime($tour['start_date'])) ?>
+                                    <?php else: ?>
+                                        <span class="text-muted">Not set</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td>
                                     <?php if ($tour['is_active']): ?>
                                         <span class="badge bg-success">Active</span>
