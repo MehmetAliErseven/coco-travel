@@ -97,14 +97,50 @@ class TourModel extends BaseModel
         return $this->searchTours($query, $categoryId, $page, $perPage);
     }
 
-    public function getToursWithPagination($page = 1, $perPage = 12, $categoryId = null)
+    public function getToursWithPagination($page = 1, $perPage = 12, $categoryId = null, $includeInactive = false)
     {
-        return $this->searchTours(null, $categoryId, $page, $perPage);
+        $params = [];
+        
+        $sql = "SELECT t.*, c.name as category_name
+                FROM {$this->table} t
+                LEFT JOIN categories c ON t.category_id = c.id";
+
+        if (!$includeInactive) {
+            $sql .= " WHERE t.is_active = 1";
+        }
+        
+        if ($categoryId) {
+            $sql .= ($includeInactive ? " WHERE" : " AND") . " t.category_id = :category_id";
+            $params['category_id'] = $categoryId;
+        }
+
+        $sql .= " ORDER BY t.is_featured DESC, t.created_at DESC";
+
+        if ($page !== null && $perPage !== null) {
+            $offset = ($page - 1) * $perPage;
+            $sql .= " LIMIT :limit OFFSET :offset";
+            $params['limit'] = $perPage;
+            $params['offset'] = $offset;
+        }
+
+        return $this->db->fetchAll($sql, $params);
     }
 
-    public function getTotalTours($categoryId = null)
+    public function getTotalTours($categoryId = null, $includeInactive = false)
     {
-        return $this->getTotalSearchResults(null, $categoryId);
+        $params = [];
+        $sql = "SELECT COUNT(*) as count FROM {$this->table}";
+        
+        if (!$includeInactive) {
+            $sql .= " WHERE is_active = 1";
+        }
+        
+        if ($categoryId) {
+            $sql .= ($includeInactive ? " WHERE" : " AND") . " category_id = :category_id";
+            $params['category_id'] = $categoryId;
+        }
+        
+        return (int)$this->db->fetch($sql, $params)['count'];
     }
 
     public function getFeaturedTours($limit = 6)

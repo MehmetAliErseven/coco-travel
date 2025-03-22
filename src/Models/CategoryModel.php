@@ -68,4 +68,15 @@ class CategoryModel extends BaseModel
         $result = $this->db->fetch($sql, ['category_id' => $categoryId]);
         return (int)$result['count'] > 0;
     }
+
+    public function getAllCategories()
+    {
+        return $this->db->fetchAll("
+            SELECT c.*, COUNT(t.id) as tour_count
+            FROM {$this->table} c
+            LEFT JOIN tours t ON c.id = t.category_id
+            GROUP BY c.id
+            ORDER BY c.name ASC
+        ");
+    }
 }

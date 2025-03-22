@@ -20,8 +20,8 @@ class TourController extends BaseAdminController
     {
         $perPage = 10;
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $tours = $this->tourModel->getToursWithPagination($currentPage, $perPage);
-        $totalTours = $this->tourModel->getTotalTours();
+        $tours = $this->tourModel->getToursWithPagination($currentPage, $perPage, null, true);
+        $totalTours = $this->tourModel->getTotalTours(null, true);
         
         $this->render('admin/tours/index', [
             'pageTitle' => 'Manage Tours',

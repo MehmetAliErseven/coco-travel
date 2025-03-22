@@ -15,7 +15,7 @@ class CategoryController extends BaseAdminController
 
     public function indexAction()
     {
-        $categories = $this->categoryModel->getActiveCategories();
+        $categories = $this->categoryModel->getAllCategories();
         
         $this->render('admin/categories/index', [
             'pageTitle' => 'Manage Categories',
